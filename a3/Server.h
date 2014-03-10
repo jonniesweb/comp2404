@@ -8,18 +8,17 @@
 #ifndef SERVER_H_
 #define SERVER_H_
 
-#include <string>
 #include "Storage.h"
-using std::string;
+#include "MovieList.h"
 
 class Server {
 public:
 	Server();
 	virtual ~Server();
 
-	void getAllMovies(List<Movie*>*);
-	void addMovies(List<Movie*>*);
-	void removeMovies(List<Movie*>*);
+	void getAllMovies(MovieList&);
+	void addMovies(MovieList&);
+	void removeMovies(MovieList&);
 
 private:
 	Storage db;

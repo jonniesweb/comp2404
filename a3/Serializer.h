@@ -19,8 +19,8 @@ public:
 	Serializer();
 	virtual ~Serializer();
 
-	void serialize(List<Movie*>& movieList, UpdateType& action, string& serialStr);
-	void deserialize(string& serialStr, UpdateType& action, List<Movie*>& movieList);
+	void serialize(List<Movie>& movieList, UpdateType& action, string& serialStr);
+	void deserialize(string& serialStr, UpdateType& action, List<Movie>& movieList);
 
 private:
 	static void charToString(char* input, string& output);

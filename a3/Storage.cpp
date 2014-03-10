@@ -9,28 +9,25 @@
  */
 
 #include "Storage.h"
-#include "List.h"
+#include "MovieList.h"
 #include "Movie.h"
 #include <iostream>
 
 Storage::Storage() {
-	list = new List<Movie*>;
 }
 
 Storage::~Storage() {
-	for (int i = 0; i < list->getSize(); ++i) {
-		std::cout << (*list->get(i))->getTitle();
-		delete list->get(i);
+	for (int i = 0; i < list.getSize(); ++i) {
+		delete &list.get(i);
 	}
-	delete list;
 }
 
 /**
  * Get all movies from the List
  * @param movies
  */
-void Storage::retrieve(List<Movie*>* movies) {
-	movies->addAll(list);
+void Storage::retrieve(MovieList& movies) {
+	movies.addAll(list);
 }
 
 /**
@@ -39,16 +36,16 @@ void Storage::retrieve(List<Movie*>* movies) {
  * @param updateType
  * @param movies
  */
-void Storage::update(UpdateType updateType, List<Movie*>* movies) {
+void Storage::update(UpdateType updateType, MovieList& movies) {
 
 	switch (updateType) {
 	case DB_ADD:
-		list->addAll(movies);
+		list.addAll(movies);
 
 		break;
 
 	case DB_DELETE:
-		list->removeAll(movies);
+		list.removeAll(movies);
 
 		break;
 	default:

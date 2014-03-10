@@ -22,19 +22,19 @@ Serializer::~Serializer() {
 	// TODO Auto-generated destructor stub
 }
 
-void Serializer::serialize(List<Movie*>& movieList, UpdateType& action, string& serialStr) {
-	Movie* movie = *(movieList.get(0));
+void Serializer::serialize(List<Movie>& movieList, UpdateType& action, string& serialStr) {
+	Movie& movie = movieList.get(0);
 	char buffer [100];
 
 	char** title = 0;
 	int updateType = updateTypeToInt(action);
-	int genre = GenreToInt(movie->getGenre());
+	int genre = GenreToInt(movie.getGenre());
 
 //	stringToChar(movie->getTitle(), title);
-	char output[movie->getTitle().size()+1];
-	strcpy(output, movie->getTitle().c_str());
+	char output[movie.getTitle().size()+1];
+	strcpy(output, movie.getTitle().c_str());
 
-	sprintf(buffer, "*%s*%d*%d*", output, movie->getYear(), 1);
+	sprintf(buffer, "*%s*%d*%d*", output, movie.getYear(), 1);
 
 	charToString(buffer, serialStr);
 
@@ -42,7 +42,7 @@ void Serializer::serialize(List<Movie*>& movieList, UpdateType& action, string& 
 
 }
 
-void Serializer::deserialize(string& serialStr, UpdateType& action, List<Movie*>& movieList) {
+void Serializer::deserialize(string& serialStr, UpdateType& action, List<Movie>& movieList) {
 
 
 }

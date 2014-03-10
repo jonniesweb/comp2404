@@ -10,7 +10,7 @@
 
 #include <string>
 #include "Movie.h"
-#include "List.h"
+#include "MovieList.h"
 
 using std::string;
 
@@ -18,16 +18,16 @@ class View {
 public:
 	View();
 	~View();
-	void listMovies(List<Movie*>*);
+	void listMovies(MovieList&);
 	int getMenuChoice();
-	void displayMessage(string);
-	void getMovies(List<Movie*>*);
+	void displayMessage(string&);
+	void getMovies(MovieList&);
 	string deleteMovie();
 	Genre getGenre();
 
 private:
 
-	Movie* getMovie();
+	Movie& getMovie();
 	string getString();
 	int getInt();
 	void displayMenu();

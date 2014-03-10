@@ -23,7 +23,7 @@ public:
 	string& getTitle();
 	int getYear();
 	Genre getGenre();
-	bool operator==(Movie& movie);
+	bool operator==(const Movie& movie);
 
 private:
 	string title;

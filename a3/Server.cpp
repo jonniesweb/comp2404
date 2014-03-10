@@ -21,7 +21,7 @@ Server::~Server() {
  * Get all movies from Storage object
  * @param movies
  */
-void Server::getAllMovies(List<Movie*>* movies) {
+void Server::getAllMovies(MovieList& movies) {
 	db.retrieve(movies);
 }
 
@@ -29,7 +29,7 @@ void Server::getAllMovies(List<Movie*>* movies) {
  * Add a DynArray of movies to the Storage object
  * @param movies
  */
-void Server::addMovies(List<Movie*>* movies) {
+void Server::addMovies(MovieList& movies) {
 	db.update(DB_ADD, movies);
 }
 
@@ -37,6 +37,6 @@ void Server::addMovies(List<Movie*>* movies) {
  * Remove a DynArray of movies from the Storage object
  * @param movies
  */
-void Server::removeMovies(List<Movie*>* movies) {
+void Server::removeMovies(MovieList& movies) {
 	db.update(DB_DELETE, movies);
 }

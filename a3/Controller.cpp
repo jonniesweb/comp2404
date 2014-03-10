@@ -18,13 +18,32 @@
 
 #include "Movie.h"
 #include "Serializer.h"
+#include "MovieList.h"
 
 using std::string;
+using std::cout;
+using std::endl;
 
 /**
  * Constructor handles program flow. Gets user menu choice then acts on that.
  */
 Controller::Controller() {
+
+//	Movie* m = new Movie("t", 1, COMEDY);
+//	Movie* n = new Movie("z", 1, COMEDY);
+//
+//	MovieList list;
+//	list.add(*m);
+//	list.add(*n);
+//
+//	cout << list.get(0).getTitle() << endl;
+//	cout << list.get(1).getTitle() << endl;
+//	list.set(1, *m);
+//
+//	cout << list.remove(0).getTitle() << endl;
+//	cout << list.remove(0).getTitle() << endl;
+
+
 
 #if 0
 	Serializer s;
@@ -43,7 +62,7 @@ Controller::Controller() {
 #endif
 
 
-#if 1
+#if 0
 
 	bool running = true;
 	int menuChoice = -1;
@@ -132,11 +151,11 @@ Controller::~Controller() {
 
 void Controller::cleanup() {
 
-	List<Movie*> movies;
-	movieStore.getAllMovies(&movies);
+	MovieList movies;
+	movieStore.getAllMovies(movies);
 
 	for (int i = 0; i < movies.getSize(); ++i) {
-		delete movies.get(i);
+		delete &movies.get(i);
 
 	}
 

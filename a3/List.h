@@ -36,7 +36,7 @@ public:
 	 * @param element
 	 * @return
 	 */
-	bool add(T* element) { // TODO: might have to take a T*
+	bool add(T& element) { // TODO: might have to take a T*
 
 		if (size == 0) { // if empty list
 			ListNode<T>* node = new ListNode<T>(element, null, null);
@@ -56,26 +56,27 @@ public:
 		++size;
 		return true;
 	}
-	void addAll(List<T>* list) {
+	void addAll(List<T>& list) {
 
-		ListNode<T>* n = list->head;
+		ListNode<T>* n = list.head;
 
 		while (n != null) {
+//			add(n->getElement());
 			add(n->getElement());
 			n = n->getNext();
 		}
 	}
 
 	// TODO: Remove this method!
-	T* remove(int index) {
+	T& remove(int index) {
 		// check if trying to access index that doesn't exist
 		if (index >= size) {
-			return null;
+			throw "out of bounds!";
 		}
 
 		if (size == 1) { // remove element from list of 1
 			ListNode<T>* node = head;
-			T* element = node->getElement();
+			T& element = node->getElement();
 			head = null;
 			tail = null;
 			delete node;
@@ -83,7 +84,7 @@ public:
 
 		} else if (index == 0) { // removing from head case
 			ListNode<T>* node = head;
-			T* element = node->getElement();
+			T& element = node->getElement();
 			head = node->getNext();
 			delete node;
 			head->setPrev(null);
@@ -93,9 +94,10 @@ public:
 
 		} else if (index == size - 1) { // removing from tail case;
 			ListNode<T>* node = tail;
-			T* element = node->getElement();
+			T& element = node->getElement();
 			tail = tail->getPrev();
 			tail->setNext(null);
+			delete node;
 			return element;
 		} else {
 			// TODO: check if it removes from the right index
@@ -106,7 +108,7 @@ public:
 			node->getPrev()->setNext(node->getNext());
 			node->getNext()->setPrev(node->getPrev());
 
-			T* element = node->getElement();
+			T& element = node->getElement();
 			delete node;
 			return element;
 		}
@@ -118,12 +120,12 @@ public:
 	 * @param element
 	 * @return If found: the element. If not found: Null
 	 */
-	void remove(const T* element) {
+	void remove(const T& element) {
 		ListNode<T>* node = head;
 		int i = 0;
 
 		while (node != null) {
-			if (*(node->getElement()) == *element) {
+			if (node->getElement() == element) { // TODO: check if valid, or dereference if not
 				remove(i);
 				return;
 			}
@@ -151,8 +153,8 @@ public:
 //			}
 //		}
 	}
-	void removeAll(List<T>* list) {
-		ListNode<T>* node = list->head;
+	void removeAll(List<T>& list) {
+		ListNode<T>* node = list.head;
 
 		while (node != null) {
 			remove(node->getElement());
@@ -166,7 +168,7 @@ public:
 	}
 //	bool contains(T* element);
 
-	T* get(int index) {
+	T& get(int index) {
 
 		if (index < size) {
 
@@ -176,14 +178,12 @@ public:
 			}
 
 			return node->getElement();
-		} else {
-			return null;
 		}
 	}
 
-	T* set(int index, T* element) {
+	T& set(int index, T& element) {
 		if (index >= size) {
-			return null;
+			throw "out of bounds!";
 		}
 
 		ListNode<T>* node = head;

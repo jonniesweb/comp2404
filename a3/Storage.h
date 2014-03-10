@@ -8,7 +8,7 @@
 #ifndef STORAGE_H_
 #define STORAGE_H_
 
-#include "List.h"
+#include "MovieList.h"
 #include "Movie.h"
 
 typedef enum UpdateType { DB_ADD, DB_DELETE } UpdateType;
@@ -18,11 +18,11 @@ public:
 	Storage();
 	virtual ~Storage();
 
-	void retrieve(List<Movie*>*);
-	void update(UpdateType, List<Movie*>*);
+	void retrieve(MovieList&);
+	void update(UpdateType, MovieList&);
 
 private:
-	List<Movie*>* list;
+	MovieList list;
 };
 
 #endif /* STORAGE_H_ */

@@ -61,7 +61,7 @@ Genre Movie::getGenre() {
 	return genre;
 }
 
-bool Movie::operator==(Movie& movie) {
+bool Movie::operator==(const Movie& movie) {
 	std::cout << "movie comparison done!" << std::endl; //XXX
 	return (movie.genre == genre && movie.title == title
 			&& movie.year == movie.year);

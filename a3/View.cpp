@@ -8,6 +8,7 @@
  */
 
 #include "View.h"
+#include "MovieList.h"
 
 #include <iostream>
 #include <sstream>
@@ -114,7 +115,7 @@ int View::getInt() {
  * Gets the user to create a movie
  * @return
  */
-Movie* View::getMovie() {
+Movie& View::getMovie() {
 
 	cout << endl;
 	cout << "Enter movie title:" << endl;
@@ -126,21 +127,22 @@ Movie* View::getMovie() {
 
 	Genre genre = getGenre();
 
-	return new Movie(title, year, genre);
+	Movie* m = new Movie(title, year, genre);
+	return *m;
 }
 
 /**
  * Get a user specified amount of movies from the user
  * @param movies
  */
-void View::getMovies(List<Movie*>* movies) {
+void View::getMovies(MovieList& movies) {
 	cout << endl;
 	cout << "Enter the number of movies to enter:" << endl;
 	int numMovies = getInt();
 
 	for (int j = 0; j < numMovies; ++j) {
-		Movie* movie = getMovie();
-		movies->add(&movie);
+		Movie& movie = getMovie();
+		movies.add(movie);
 	}
 
 }
@@ -159,14 +161,14 @@ string View::deleteMovie() {
  * Output an array of movies to the user
  * @param movies
  */
-void View::listMovies(List<Movie*>* movies) {
-	Movie* movie;
-	for (int i = 0; i < movies->getSize(); ++i) {
-		movie = *movies->get(i);
+void View::listMovies(MovieList& movies) {
+
+	for (int i = 0; i < movies.getSize(); ++i) {
+		Movie& movie = movies.get(i);
 		cout << endl;
-		cout << "Title: " << movie->getTitle() << endl;
-		cout << "Year:  " << movie->getYear() << endl;
-		cout << "Genre: " << genreToString(movie->getGenre()) << endl;
+		cout << "Title: " << movie.getTitle() << endl;
+		cout << "Year:  " << movie.getYear() << endl;
+		cout << "Genre: " << genreToString(movie.getGenre()) << endl;
 	}
 
 }
@@ -205,7 +207,7 @@ string View::genreToString(Genre genre) {
 		return "Western";
 		break;
 
-	case UNKNOWN: // cascade down
+	case UNKNOWN: // fallthrough
 	default:
 		return "Unknown";
 		break;
@@ -216,6 +218,6 @@ string View::genreToString(Genre genre) {
  * Display a message to the user
  * @param s
  */
-void View::displayMessage(string s) {
+void View::displayMessage(string& s) {
 	cout << s << endl;
 }
