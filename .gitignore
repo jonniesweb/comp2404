@@ -15,3 +15,13 @@
 # archives
 *.tar
 *.zip
+
+# make stuff
+
+# eclipse stuff
+/.metadata
+/RemoteSystemsTempFiles
+**/Debug
+**/.settings
+.cproject
+.project

@@ -1,0 +1,75 @@
+*******************************************************************************
+
+              Jonathan Simpson - COMP 2404 - Assignment 2
+              
+*******************************************************************************
+
+
+Preamble
+--------
+
+A movie database program! Classes adhere to MVC. The user is presented a menu
+to select a slew of operations (add, delete, view, search-view, exit). Adding
+a movie requires entering the name, year and genre of the movie. 
+
+
+Compilation Command
+-------------------
+
+Run the following command in the root directory of the files:
+
+  make
+
+Run the following command to clear the generated build and runtime files:
+
+make clean
+
+
+Launching and Operating Instructions
+------------------------------------
+
+Run the program with the following command:
+
+  ./mdb
+
+Adding a single or multiple movies to the database is done by entering 1 from
+the main menu, entering in how many movies you would like to add, then entering
+in the respective title, year and genre for each movie.
+
+Delete a movie that is in the database by entering 2 for "Delete a movie", then
+entering the full title of the movie to delete.
+
+Display all of the movies currently in the database by entering 3 for "List all
+movies" from the main menu.
+
+List all movies of a specific genre by entering 4 at the main menu for "List all
+movies by genre" and then entering the respective genre you are interested
+in showing.
+
+Exit the program by entering 0 for "Quit" at the main menu.
+
+
+Files Included
+--------------
+
+Root Dir
+ |-> README
+ |-> Makefile
+ |-> Controller.cpp
+ |-> Controller.h
+ |-> DynArray.cpp
+ |-> DynArray.h
+ |-> Main.cpp
+ |-> Movie.cpp
+ |-> Movie.h
+ |-> Server.cpp
+ |-> Server.h
+ |-> Storage.cpp
+ |-> Storage.h
+ |-> View.cpp
+ |-> View.h
+ |-> UML Diagram A2.pdf
+ \-> UML Diagram A2.png
+ 
+ 
+ 
