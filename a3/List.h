@@ -19,6 +19,9 @@ template<class T>
 class List {
 public:
 	List() {
+		size = 0;
+		head = null;
+		tail = null;
 	}
 
 	virtual ~List() {
@@ -181,7 +184,7 @@ public:
 		}
 	}
 
-	T& set(int index, T& element) {
+	T& set(int index, const T& element) {
 		if (index >= size) {
 			throw "out of bounds!";
 		}
@@ -195,9 +198,9 @@ public:
 	}
 
 private:
-	int size = 0;
-	ListNode<T>* head = null;
-	ListNode<T>* tail = null;
+	int size;
+	ListNode<T>* head;
+	ListNode<T>* tail;
 
 };
 

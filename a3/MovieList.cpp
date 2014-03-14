@@ -44,10 +44,10 @@ int MovieList::getSize() {
 	return list.getSize();
 }
 
-Movie& MovieList::get(int index) {
+Movie& MovieList::get(const int index) {
 	return list.get(index);
 }
 
-Movie& MovieList::set(int index, Movie& newMovie) {
+Movie& MovieList::set(const int index, const Movie& newMovie) {
 	return list.set(index, newMovie);
 }

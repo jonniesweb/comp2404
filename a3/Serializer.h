@@ -19,16 +19,20 @@ public:
 	Serializer();
 	virtual ~Serializer();
 
-	void serialize(List<Movie>& movieList, UpdateType& action, string& serialStr);
-	void deserialize(string& serialStr, UpdateType& action, List<Movie>& movieList);
+	void serialize(MovieList& movieList, UpdateType& action, string& serialStr);
+	void deserialize(string& serialStr, UpdateType& action, MovieList& movieList);
 
 private:
 	static void charToString(char* input, string& output);
 	static void stringToChar(string& input, char** output);
-	static int updateTypeToInt(UpdateType& updateType);
-	static UpdateType intToUpdateType(int);
-	static int GenreToInt(Genre);
-	static Genre intToGenre(int);
+	static char updateTypeToChar(UpdateType& updateType);
+	static UpdateType charToUpdateType(char);
+	static int GenreToChar(Genre);
+	static Genre CharToGenre(const char*);
+	static int strlen(char *s);
+	static void reverse(char *s);
+	static char* intToChar(int);
+	static int charToInt(const string&);
 };
 
 #endif /* SERIALIZER_H_ */

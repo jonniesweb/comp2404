@@ -25,7 +25,7 @@ public:
 		return element;
 	}
 
-	T& setElement(T& newElement) {
+	T& setElement(const T& newElement) {
 		T& oldElement = element;
 		element = newElement;
 

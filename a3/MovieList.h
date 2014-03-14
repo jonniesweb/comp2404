@@ -23,7 +23,7 @@ public:
 	void removeAll(MovieList&);
 	int getSize();
 	Movie& get(int);
-	Movie& set(int, Movie&);
+	Movie& set(const int, const Movie&);
 
 
 private:

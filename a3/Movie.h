@@ -9,12 +9,18 @@
 #define MOVIE_H_
 
 #include <string>
+#include <ostream>
 
 typedef enum Genre { COMEDY, ACTION, HORROR, DRAMA, SF, ADVENTURE, WESTERN, UNKNOWN } Genre;
 
 using std::string;
+using std::ostream;
+
 
 class Movie {
+
+friend ostream& operator<<(ostream&, Movie&);
+
 public:
 	Movie(string, int, Genre);
 	~Movie();

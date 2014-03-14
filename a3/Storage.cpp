@@ -22,6 +22,11 @@ Storage::~Storage() {
 	}
 }
 
+void Storage::handleRequest(string& request, string& reply) {
+
+
+}
+
 /**
  * Get all movies from the List
  * @param movies
@@ -52,3 +57,4 @@ void Storage::update(UpdateType updateType, MovieList& movies) {
 		break;
 	}
 }
+

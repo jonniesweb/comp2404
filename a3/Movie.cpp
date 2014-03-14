@@ -30,7 +30,8 @@ Movie::~Movie() {
 
 }
 
-Movie::Movie(Movie& movie) : title(movie.title), year(movie.year), genre(movie.genre) {
+Movie::Movie(Movie& movie) :
+		title(movie.title), year(movie.year), genre(movie.genre) {
 	std::cout << "Movie " << title << " has been copied" << std::endl;
 }
 
@@ -62,8 +63,11 @@ Genre Movie::getGenre() {
 }
 
 bool Movie::operator==(const Movie& movie) {
-	std::cout << "movie comparison done!" << std::endl; //XXX
 	return (movie.genre == genre && movie.title == title
 			&& movie.year == movie.year);
+}
 
+ostream& operator<<(ostream& os, Movie& movie) {
+	os << "title: " << movie.getTitle() << " year: " << movie.getYear() << " genre: " << movie.getGenre();
+	return os;
 }

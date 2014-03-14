@@ -12,13 +12,14 @@
 
 #include "Controller.h"
 
+//#include <cstdlib>
 #include <iostream>
-#include <cstdlib>
 #include <string>
 
 #include "Movie.h"
-#include "Serializer.h"
 #include "MovieList.h"
+#include "Serializer.h"
+#include "Storage.h"
 
 using std::string;
 using std::cout;
@@ -29,36 +30,30 @@ using std::endl;
  */
 Controller::Controller() {
 
-//	Movie* m = new Movie("t", 1, COMEDY);
-//	Movie* n = new Movie("z", 1, COMEDY);
-//
-//	MovieList list;
-//	list.add(*m);
-//	list.add(*n);
-//
-//	cout << list.get(0).getTitle() << endl;
-//	cout << list.get(1).getTitle() << endl;
-//	list.set(1, *m);
-//
-//	cout << list.remove(0).getTitle() << endl;
-//	cout << list.remove(0).getTitle() << endl;
-
-
-
-#if 0
+#if 1
 	Serializer s;
-	Movie* m = new Movie("test", 1, COMEDY);
-	List<Movie*> list;
-	list.add(&m);
+	Movie m ("test", 1864, COMEDY);
+	Movie n ("test2", 1990, HORROR);
+	MovieList list;
+	list.add(m);
+	list.add(n);
 
 	string str;
 	UpdateType type = DB_ADD;
 
 	s.serialize(list, type, str);
 
-	std::cout << str;
+	std::cout << str << endl;
 
-	delete m;
+	MovieList newMovies;
+	UpdateType action;
+	s.deserialize(str, action, newMovies);
+
+	cout << newMovies.get(0) << endl;
+	cout << newMovies.get(1) << endl;
+
+
+
 #endif
 
 
@@ -72,64 +67,64 @@ Controller::Controller() {
 
 		if (menuChoice == 1) { // add movies
 
-			List<Movie*> newMovies;
-			view.getMovies(&newMovies);
+			MovieList newMovies;
+			view.getMovies(newMovies);
 
-			movieStore.addMovies(&newMovies);
+			movieStore.addMovies(newMovies);
 
 		} else if (menuChoice == 2) { // delete movie
 
-			List<Movie*> removedMovies;
+			MovieList removedMovies;
 			string movieTitle = view.deleteMovie();
 
-			List<Movie*> movieList;
-			view.getMovies(&movieList);
+			MovieList movieList;
+			view.getMovies(movieList);
 
 			for (int i = 0; i < movieList.getSize(); ++i) {
-				if ((*movieList.get(i))->getTitle().compare(movieTitle) == 0) {
+				if (movieList.get(i).getTitle().compare(movieTitle) == 0) {
 					removedMovies.add(movieList.get(i));
 				}
 			}
 
-			movieStore.removeMovies(&removedMovies);
+			movieStore.removeMovies(removedMovies);
 
 		} else if (menuChoice == 3) { // list all movies
 
-			List<Movie*> allMovies;
-			movieStore.getAllMovies(&allMovies);
+			MovieList allMovies;
+			movieStore.getAllMovies(allMovies);
 
-			view.listMovies(&allMovies);
+			view.listMovies(allMovies);
 
 		} else if (menuChoice == 4) { // list movies by genre
 
 			Genre genre = view.getGenre();
-			List<Movie*> allMovies;
-			List<Movie*> genreMovies;
+			MovieList allMovies;
+			MovieList genreMovies;
 
-			movieStore.getAllMovies(&allMovies);
+			movieStore.getAllMovies(allMovies);
 
 			for (int i = 0; i < allMovies.getSize(); ++i) {
-				if ((*allMovies.get(i))->getGenre() == genre) {
+				if (allMovies.get(i).getGenre() == genre) {
 					genreMovies.add(allMovies.get(i));
 				}
 			}
 
-			view.listMovies(&genreMovies);
+			view.listMovies(genreMovies);
 
 		} else if (menuChoice == 5) {
 
-			List<Movie*> allMovies;
-			movieStore.getAllMovies(&allMovies);
+			MovieList allMovies;
+			movieStore.getAllMovies(allMovies);
 
 			// reverse list
 			int totalSize = allMovies.getSize();
 			for (int i = 0; i < totalSize/2; ++i) {
-				Movie* switchMovie = *allMovies.get(i);
+				Movie& switchMovie = allMovies.get(i);
 				allMovies.set(i, allMovies.get(totalSize - i -1));
-				allMovies.set(totalSize - i -1, &switchMovie);
+				allMovies.set(totalSize - i -1, switchMovie);
 			}
 
-			view.listMovies(&allMovies);
+			view.listMovies(allMovies);
 
 		} else if (menuChoice == 0) { // exit
 //			cleanup();

@@ -18,11 +18,13 @@ public:
 	Storage();
 	virtual ~Storage();
 
+	void handleRequest(string&, string&);
 	void retrieve(MovieList&);
 	void update(UpdateType, MovieList&);
 
 private:
 	MovieList list;
+
 };
 
 #endif /* STORAGE_H_ */

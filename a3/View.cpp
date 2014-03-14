@@ -161,7 +161,7 @@ string View::deleteMovie() {
  * Output an array of movies to the user
  * @param movies
  */
-void View::listMovies(MovieList& movies) {
+const void View::listMovies(MovieList& movies) {
 
 	for (int i = 0; i < movies.getSize(); ++i) {
 		Movie& movie = movies.get(i);
@@ -218,6 +218,6 @@ string View::genreToString(Genre genre) {
  * Display a message to the user
  * @param s
  */
-void View::displayMessage(string& s) {
+void View::displayMessage(const string& s) {
 	cout << s << endl;
 }

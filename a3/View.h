@@ -18,9 +18,9 @@ class View {
 public:
 	View();
 	~View();
-	void listMovies(MovieList&);
+	const void listMovies(MovieList&);
 	int getMenuChoice();
-	void displayMessage(string&);
+	void displayMessage(const string&);
 	void getMovies(MovieList&);
 	string deleteMovie();
 	Genre getGenre();
