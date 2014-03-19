@@ -112,26 +112,6 @@ int View::getInt() {
 }
 
 /**
- * Gets the user to create a movie
- * @return
- */
-Movie& View::getMovie() {
-
-	cout << endl;
-	cout << "Enter movie title:" << endl;
-	string title = getString();
-
-	cout << endl;
-	cout << "Enter movie year:" << endl;
-	int year = getInt();
-
-	Genre genre = getGenre();
-
-	Movie* m = new Movie(title, year, genre);
-	return *m;
-}
-
-/**
  * Get a user specified amount of movies from the user
  * @param movies
  */
@@ -141,7 +121,20 @@ void View::getMovies(MovieList& movies) {
 	int numMovies = getInt();
 
 	for (int j = 0; j < numMovies; ++j) {
-		Movie& movie = getMovie();
+
+		// get info for the movie
+		cout << endl;
+		cout << "Enter movie title:" << endl;
+		string title = getString();
+
+		cout << endl;
+		cout << "Enter movie year:" << endl;
+		int year = getInt();
+
+		Genre genre = getGenre();
+
+		// create and add the movie to the list
+		Movie movie(title, year, genre);
 		movies.add(movie);
 	}
 
@@ -171,6 +164,16 @@ const void View::listMovies(MovieList& movies) {
 		cout << "Genre: " << genreToString(movie.getGenre()) << endl;
 	}
 
+}
+
+const void View::listMoviesReverse(MovieList& movies) {
+	for (int i = movies.getSize() - 1; i > -1; --i) {
+		Movie& movie = movies.get(i);
+				cout << endl;
+				cout << "Title: " << movie.getTitle() << endl;
+				cout << "Year:  " << movie.getYear() << endl;
+				cout << "Genre: " << genreToString(movie.getGenre()) << endl;
+	}
 }
 
 /**

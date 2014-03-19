@@ -30,7 +30,7 @@ using std::endl;
  */
 Controller::Controller() {
 
-#if 1
+#if 0
 	Serializer s;
 	Movie m ("test", 1864, COMEDY);
 	Movie n ("test2", 1990, HORROR);
@@ -57,7 +57,7 @@ Controller::Controller() {
 #endif
 
 
-#if 0
+#if 1
 
 	bool running = true;
 	int menuChoice = -1;
@@ -78,7 +78,7 @@ Controller::Controller() {
 			string movieTitle = view.deleteMovie();
 
 			MovieList movieList;
-			view.getMovies(movieList);
+			movieStore.getAllMovies(movieList);
 
 			for (int i = 0; i < movieList.getSize(); ++i) {
 				if (movieList.get(i).getTitle().compare(movieTitle) == 0) {
@@ -111,20 +111,11 @@ Controller::Controller() {
 
 			view.listMovies(genreMovies);
 
-		} else if (menuChoice == 5) {
-
+		} else if (menuChoice == 5) { // list all movies in reverse
 			MovieList allMovies;
 			movieStore.getAllMovies(allMovies);
 
-			// reverse list
-			int totalSize = allMovies.getSize();
-			for (int i = 0; i < totalSize/2; ++i) {
-				Movie& switchMovie = allMovies.get(i);
-				allMovies.set(i, allMovies.get(totalSize - i -1));
-				allMovies.set(totalSize - i -1, switchMovie);
-			}
-
-			view.listMovies(allMovies);
+			view.listMoviesReverse(allMovies);
 
 		} else if (menuChoice == 0) { // exit
 //			cleanup();

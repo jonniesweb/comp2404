@@ -19,6 +19,7 @@ public:
 	View();
 	~View();
 	const void listMovies(MovieList&);
+	const void listMoviesReverse(MovieList&);
 	int getMenuChoice();
 	void displayMessage(const string&);
 	void getMovies(MovieList&);

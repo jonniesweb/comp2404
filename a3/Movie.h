@@ -24,7 +24,7 @@ friend ostream& operator<<(ostream&, Movie&);
 public:
 	Movie(string, int, Genre);
 	~Movie();
-	Movie(Movie&);
+	Movie(const Movie&);
 
 	string& getTitle();
 	int getYear();

@@ -29,6 +29,7 @@ public:
 		ListNode<T>* next;
 		while (node != null) {
 			next = node->getNext();
+			delete &node->getElement();
 			delete node;
 			node = next;
 		}
@@ -39,15 +40,17 @@ public:
 	 * @param element
 	 * @return
 	 */
-	bool add(T& element) { // TODO: might have to take a T*
+	bool add(const T& element) {
+
+		T* item = new T(element);
 
 		if (size == 0) { // if empty list
-			ListNode<T>* node = new ListNode<T>(element, null, null);
+			ListNode<T>* node = new ListNode<T>(*item, null, null);
 			head = node;
 			tail = node;
 
 		} else if (size > 0) { // if elements in list already
-			ListNode<T>* node = new ListNode<T>(element, tail, null);
+			ListNode<T>* node = new ListNode<T>(*item, tail, null);
 			tail->setNext(node);
 			tail = node;
 
@@ -64,7 +67,6 @@ public:
 		ListNode<T>* n = list.head;
 
 		while (n != null) {
-//			add(n->getElement());
 			add(n->getElement());
 			n = n->getNext();
 		}
@@ -103,7 +105,6 @@ public:
 			delete node;
 			return element;
 		} else {
-			// TODO: check if it removes from the right index
 			ListNode<T>* node = head;
 			for (int j = 0; j < index; ++j) {
 				node = node->getNext();
