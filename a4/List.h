@@ -26,16 +26,16 @@ public:
 	}
 
 	virtual ~List() {
-		ListNode<T>* node = head;
-		ListNode<T>* next;
-		while (node != null) {
-			next = node->getNext();
-//			T* element = node->getElement();
-//				delete &element;
-//			delete &node->getElement();
-			delete node;
-			node = next;
-		}
+//		ListNode<T>* node = head;
+//		ListNode<T>* next;
+//		while (node != null) {
+//			next = node->getNext();
+////			T* element = node->getElement();
+////				delete &element;
+////			delete &node->getElement();
+//			delete node;
+//			node = next;
+//		}
 
 	}
 

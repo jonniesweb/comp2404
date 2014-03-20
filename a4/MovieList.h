@@ -16,7 +16,7 @@ public:
 	MovieList();
 	virtual ~MovieList();
 
-	bool add(Movie&);
+	bool add(const Movie&);
 	void addAll(MovieList&);
 	Movie& remove(int);
 	void remove(const Movie&);
@@ -28,6 +28,14 @@ public:
 	 * Operators
 	 */
 	MovieList& operator=(MovieList&);
+	MovieList& operator+=(const Movie*);
+	MovieList& operator+=(MovieList&);
+	MovieList& operator+(const Movie*);
+	MovieList& operator+(MovieList&);
+	MovieList& operator-=(const Movie*);
+	MovieList& operator-=(MovieList&);
+	MovieList& operator-(const Movie*);
+	MovieList& operator-(MovieList&);
 
 private:
 	List<Movie> list;
