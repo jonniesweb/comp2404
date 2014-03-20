@@ -30,10 +30,13 @@ public:
 		ListNode<T>* next;
 		while (node != null) {
 			next = node->getNext();
-			delete &node->getElement();
+//			T* element = node->getElement();
+//				delete &element;
+//			delete &node->getElement();
 			delete node;
 			node = next;
 		}
+
 	}
 
 	/**
@@ -46,12 +49,12 @@ public:
 		T* item = new T(element);
 
 		if (size == 0) { // if empty list
-			ListNode<T>* node = new ListNode<T>(*item, null, null);
+			ListNode<T>* node = new ListNode<T>(item, null, null);
 			head = node;
 			tail = node;
 
 		} else if (size > 0) { // if elements in list already
-			ListNode<T>* node = new ListNode<T>(*item, tail, null);
+			ListNode<T>* node = new ListNode<T>(item, tail, null);
 			tail->setNext(node);
 			tail = node;
 
@@ -64,9 +67,10 @@ public:
 		++size;
 		return true;
 	}
+
 	void addAll(List<T>& list) {
 
-		ListNode<T>* n = list.head;
+		ListNode<T>* n = list.tail;
 
 		while (n != null) {
 			add(n->getElement());
@@ -78,34 +82,37 @@ public:
 	T& remove(int index) {
 		// check if trying to access index that doesn't exist
 		if (index >= size) {
+			std::cerr << "Removing element index is out of bounds";
 			throw "out of bounds!";
 		}
 
 		if (size == 1) { // remove element from list of 1
 			ListNode<T>* node = head;
-			T& element = node->getElement();
+			T* element = node->getElement();
 			head = null;
 			tail = null;
+			--size;
 			delete node;
-			return element;
+			return *element;
 
 		} else if (index == 0) { // removing from head case
 			ListNode<T>* node = head;
-			T& element = node->getElement();
+			T* element = node->getElement();
 			head = node->getNext();
 			delete node;
 			head->setPrev(null);
 
 			--size;
-			return element;
+			return *element;
 
 		} else if (index == size - 1) { // removing from tail case;
 			ListNode<T>* node = tail;
-			T& element = node->getElement();
+			T* element = node->getElement();
 			tail = tail->getPrev();
 			tail->setNext(null);
+			--size;
 			delete node;
-			return element;
+			return *element;
 		} else {
 			ListNode<T>* node = head;
 			for (int j = 0; j < index; ++j) {
@@ -114,9 +121,10 @@ public:
 			node->getPrev()->setNext(node->getNext());
 			node->getNext()->setPrev(node->getPrev());
 
-			T& element = node->getElement();
+			T* element = node->getElement();
+			--size;
 			delete node;
-			return element;
+			return *element;
 		}
 	}
 
@@ -131,7 +139,7 @@ public:
 		int i = 0;
 
 		while (node != null) {
-			if (node->getElement() == element) { // TODO: check if valid, or dereference if not
+			if (*node->getElement() == element) { // TODO: check if valid, or dereference if not
 				remove(i);
 				return;
 			}
@@ -183,24 +191,12 @@ public:
 				node = node->getNext();
 			}
 
-			return node->getElement();
+			return *node->getElement();
 		} else {
 			throw "out of bounds!";
 		}
 	}
 
-	T& set(int index, const T& element) {
-		if (index >= size) {
-			throw "out of bounds!";
-		}
-
-		ListNode<T>* node = head;
-		for (int i = 0; i < index; ++i) {
-			node = node->getNext();
-		}
-
-		return node->setElement(element);
-	}
 
 private:
 	int size;

@@ -8,8 +8,9 @@
  */
 
 #include "Movie.h"
-#include <iostream>
-#include <string>
+
+//#include <iostream>
+//#include <string>
 
 using std::string;
 

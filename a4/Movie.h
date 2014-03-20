@@ -8,8 +8,8 @@
 #ifndef MOVIE_H_
 #define MOVIE_H_
 
+#include <iostream>
 #include <string>
-#include <ostream>
 
 typedef enum Genre { COMEDY, ACTION, HORROR, DRAMA, SF, ADVENTURE, WESTERN, UNKNOWN } Genre;
 

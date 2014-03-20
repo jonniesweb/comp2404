@@ -40,7 +40,7 @@ void MovieList::removeAll(MovieList& movies) {
 		}
 }
 
-int MovieList::getSize() {
+const int MovieList::getSize() {
 	return list.getSize();
 }
 
@@ -48,6 +48,22 @@ Movie& MovieList::get(const int index) {
 	return list.get(index);
 }
 
-Movie& MovieList::set(const int index, const Movie& newMovie) {
-	return list.set(index, newMovie);
+
+MovieList& MovieList::operator=(MovieList& rhs) {
+
+	// clear the list
+	int size = list.getSize();
+	for (int i = 0; i < size; ++i) {
+		list.remove(0);
+	}
+
+	// add all elements to the list
+	for (int i = 0; i < rhs.getSize(); ++i) {
+		list.add(rhs.get(i));
+	}
+
+	return rhs;
+
 }
+
+

@@ -13,20 +13,19 @@ template<class T>
 class ListNode {
 
 public:
-	ListNode(T& element, ListNode<T>* prev, ListNode<T>* next) :
+	ListNode(T* element, ListNode<T>* prev, ListNode<T>* next) :
 			element(element), prev(prev), next(next) {
 	}
 
 	~ListNode() {
-
 	}
 
-	T& getElement() {
+	T* getElement() {
 		return element;
 	}
 
-	T& setElement(const T& newElement) {
-		T& oldElement = element;
+	T* setElement(T* newElement) {
+		T* oldElement = element;
 		element = newElement;
 
 		return oldElement;
@@ -49,7 +48,7 @@ public:
 	}
 
 private:
-	T& element;
+	T* element;
 	ListNode<T>* prev;
 	ListNode<T>* next;
 };

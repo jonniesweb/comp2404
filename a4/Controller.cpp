@@ -31,6 +31,29 @@ using std::endl;
 Controller::Controller() {
 
 #if 1
+	MovieList movies;
+	Movie m("test1", 123, COMEDY);
+	Movie n("test2", 413, HORROR);
+	movies.add(m);
+	movies.add(n);
+
+	MovieList movies2;
+	Movie o("test3", 5243, SF);
+	movies2.add(o);
+
+	MovieList movies3 = movies2 = movies;
+	cout << "ML2:\n";
+	view.listMovies(movies2);
+
+	cout << "ML3:\n";
+	view.listMovies(movies3);
+
+
+#endif
+
+
+
+#if 0
 
 	bool running = true;
 	int menuChoice = -1;

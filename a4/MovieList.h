@@ -21,10 +21,13 @@ public:
 	Movie& remove(int);
 	void remove(const Movie&);
 	void removeAll(MovieList&);
-	int getSize();
+	const int getSize();
 	Movie& get(int);
-	Movie& set(const int, const Movie&);
 
+	/*
+	 * Operators
+	 */
+	MovieList& operator=(MovieList&);
 
 private:
 	List<Movie> list;
