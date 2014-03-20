@@ -135,7 +135,7 @@ void View::getMovies(MovieList& movies) {
 
 		// create and add the movie to the list
 		Movie movie(title, year, genre);
-		movies.add(movie);
+		movies += &movie;
 	}
 
 }

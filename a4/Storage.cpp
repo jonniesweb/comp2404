@@ -56,7 +56,7 @@ void Storage::handleRequest(string& request, string& reply) {
  * @param movies
  */
 void Storage::retrieve(MovieList& movies) {
-	movies.addAll(list);
+	movies += list;
 //	std::cout << "Movies retrieved from storage\n";
 }
 
@@ -70,12 +70,12 @@ void Storage::update(UpdateType updateType, MovieList& movies) {
 
 	switch (updateType) {
 	case DB_ADD:
-		list.addAll(movies);
+		list += movies;
 
 		break;
 
 	case DB_DELETE:
-		list.removeAll(movies);
+		list -= movies;
 
 		break;
 	default:

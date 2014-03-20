@@ -65,7 +65,7 @@ Genre Movie::getGenre() {
 
 bool Movie::operator==(const Movie& movie) {
 	return (movie.genre == genre && movie.title == title
-			&& movie.year == movie.year);
+			&& movie.year == year);
 }
 
 ostream& operator<<(ostream& os, Movie& movie) {

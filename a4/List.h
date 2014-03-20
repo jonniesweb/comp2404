@@ -143,6 +143,7 @@ public:
 				remove(i);
 				return;
 			}
+			node = node->getNext();
 			++i;
 		}
 

@@ -79,7 +79,7 @@ void Serializer::deserialize(string& serialStr, UpdateType& action, MovieList& m
 		i = next + 1;
 
 		Movie m(title, year, genre);
-		movieList.add(m);
+		movieList += &m;
 	}
 
 }

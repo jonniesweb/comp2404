@@ -88,7 +88,7 @@ Controller::Controller() {
 
 			for (int i = 0; i < movieList.getSize(); ++i) {
 				if (movieList.get(i).getTitle().compare(movieTitle) == 0) {
-					removedMovies.add(movieList.get(i));
+					removedMovies += &movieList.get(i);
 				}
 			}
 
@@ -111,7 +111,7 @@ Controller::Controller() {
 
 			for (int i = 0; i < allMovies.getSize(); ++i) {
 				if (allMovies.get(i).getGenre() == genre) {
-					genreMovies.add(allMovies.get(i));
+					genreMovies += &allMovies.get(i);
 				}
 			}
 

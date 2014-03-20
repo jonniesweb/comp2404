@@ -12,21 +12,38 @@
 #include "Movie.h"
 
 class MovieList {
+
+	/*
+	 * Constructor/Destructor
+	 */
 public:
 	MovieList();
 	virtual ~MovieList();
 
-	bool add(const Movie&);
-	void addAll(MovieList&);
-	Movie& remove(int);
-	void remove(const Movie&);
-	void removeAll(MovieList&);
+	/*
+	 * Methods
+	 */
+public:
 	const int getSize();
 	Movie& get(int);
+
+private:
+	bool add(const Movie&);
+	void addAll(MovieList&);
+	void remove(const Movie&);
+	void removeAll(MovieList&);
+	Movie& remove(int);
+
+	/*
+	 * Fields
+	 */
+private:
+	List<Movie> list;
 
 	/*
 	 * Operators
 	 */
+public:
 	MovieList& operator=(MovieList&);
 	MovieList& operator+=(const Movie*);
 	MovieList& operator+=(MovieList&);
@@ -36,9 +53,6 @@ public:
 	MovieList& operator-=(MovieList&);
 	MovieList& operator-(const Movie*);
 	MovieList& operator-(MovieList&);
-
-private:
-	List<Movie> list;
 
 
 };
