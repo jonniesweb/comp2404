@@ -118,7 +118,6 @@ Controller::Controller() {
 			view.listMoviesReverse(allMovies);
 
 		} else if (menuChoice == 0) { // exit
-//			cleanup();
 			running = false;
 
 		} else {
@@ -133,16 +132,4 @@ Controller::Controller() {
 
 Controller::~Controller() {
 	std::cout << "program exited successfully" << std::endl;
-}
-
-void Controller::cleanup() {
-
-	MovieList movies;
-	movieStore.getAllMovies(movies);
-
-	for (int i = 0; i < movies.getSize(); ++i) {
-		delete &movies.get(i);
-
-	}
-
 }

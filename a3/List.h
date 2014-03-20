@@ -9,6 +9,7 @@
 #define LIST_H_
 
 #include "ListNode.h"
+#include <iostream>
 
 #ifndef null
 #define null 0
@@ -55,6 +56,7 @@ public:
 			tail = node;
 
 		} else { // if somehow not able to add element
+			std::cerr << "List::add() Error adding an element to the List\n";
 			return false;
 		}
 
@@ -182,6 +184,8 @@ public:
 			}
 
 			return node->getElement();
+		} else {
+			throw "out of bounds!";
 		}
 	}
 

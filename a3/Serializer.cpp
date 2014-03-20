@@ -47,16 +47,6 @@ void Serializer::serialize(MovieList& movieList, UpdateType& action, string& ser
 
 }
 
-string getcharacters(const string& str, int start, int& newStart) {
-	int i = 0;
-	while (str[start+i] != '*') {
-		i++;
-	}
-	newStart = start + i;
-
-	return str.substr(start, i);
-}
-
 void Serializer::deserialize(string& serialStr, UpdateType& action, MovieList& movieList) {
 
 	unsigned int i = 2;
@@ -88,10 +78,20 @@ void Serializer::deserialize(string& serialStr, UpdateType& action, MovieList& m
 		Genre genre = CharToGenre(getcharacters(serialStr, i, next).c_str());
 		i = next + 1;
 
-		Movie* m = new Movie(title, year, genre);
-		movieList.add(*m);
+		Movie m(title, year, genre);
+		movieList.add(m);
 	}
 
+}
+
+string Serializer::getcharacters(const string& str, int start, int& newStart) {
+	int i = 0;
+	while (str[start+i] != '*') {
+		i++;
+	}
+	newStart = start + i;
+
+	return str.substr(start, i);
 }
 
 char Serializer::updateTypeToChar(UpdateType& updateType) {

@@ -21,9 +21,9 @@ Storage::Storage() {
 }
 
 Storage::~Storage() {
-	for (int i = 0; i < list.getSize(); ++i) {
-		delete &list.get(i);
-	}
+//	for (int i = 0; i < list.getSize(); ++i) {
+//		delete &list.get(i);
+//	}
 }
 
 void Storage::handleRequest(string& request, string& reply) {

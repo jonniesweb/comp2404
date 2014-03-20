@@ -28,6 +28,7 @@ public:
 	void deserialize(string& serialStr, UpdateType& action, MovieList& movieList);
 
 private:
+	string getcharacters(const string& str, int start, int& newStart);
 	void charToString(char* input, string& output);
 	void stringToChar(string& input, char** output);
 	char updateTypeToChar(UpdateType& updateType);

@@ -23,7 +23,6 @@ private:
 	Server movieStore; // server copy
 	View view;
 
-	void cleanup();
 };
 
 #endif /* CONTROLLER_H_ */
