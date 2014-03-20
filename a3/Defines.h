@@ -11,7 +11,7 @@
 #define DEFINES_H_
 
 
-typedef enum UpdateType { DB_ADD, DB_DELETE, DB_RETRIEVE } UpdateType;
+typedef enum UpdateType { DB_ADD, DB_DELETE, DB_RETRIEVE, DB_ACK } UpdateType;
 
 
 #endif /* DEFINES_H_ */

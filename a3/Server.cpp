@@ -10,6 +10,8 @@
 
 #include "Server.h"
 #include "List.h"
+#include "Serializer.h"
+#include "Defines.h"
 
 Server::Server() {
 }
@@ -22,7 +24,14 @@ Server::~Server() {
  * @param movies
  */
 void Server::getAllMovies(MovieList& movies) {
-	db.retrieve(movies);
+//	db.retrieve(movies);
+	UpdateType action = DB_RETRIEVE;
+	string serial;
+	serializer.serialize(movies, action, serial);
+
+	string response;
+	db.handleRequest(serial, response);
+	serializer.deserialize(response, action, movies);
 }
 
 /**
@@ -30,7 +39,14 @@ void Server::getAllMovies(MovieList& movies) {
  * @param movies
  */
 void Server::addMovies(MovieList& movies) {
-	db.update(DB_ADD, movies);
+//	db.update(DB_ADD, movies);
+	UpdateType action = DB_ADD;
+	string serial;
+	serializer.serialize(movies, action, serial);
+
+	string unused;
+	db.handleRequest(serial, unused);
+
 }
 
 /**
@@ -38,5 +54,12 @@ void Server::addMovies(MovieList& movies) {
  * @param movies
  */
 void Server::removeMovies(MovieList& movies) {
-	db.update(DB_DELETE, movies);
+//	db.update(DB_DELETE, movies);
+	UpdateType action = DB_DELETE;
+	string serial;
+
+	serializer.serialize(movies, action, serial);
+
+	string unused;
+	db.handleRequest(serial, unused);
 }

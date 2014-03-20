@@ -9,9 +9,13 @@
  */
 
 #include "Storage.h"
-#include "MovieList.h"
-#include "Movie.h"
+
 #include <iostream>
+//#include <string>
+
+#include "Movie.h"
+//#include "MovieList.h"
+//#include "Serializer.h"
 
 Storage::Storage() {
 }
@@ -24,6 +28,26 @@ Storage::~Storage() {
 
 void Storage::handleRequest(string& request, string& reply) {
 
+	UpdateType action;
+	UpdateType ack = DB_ACK;
+	MovieList movies;
+
+	serializer.deserialize(request, action, movies);
+
+	switch (action) {
+	case DB_ADD:
+	case DB_DELETE:
+		update(action, movies);
+		break;
+	case DB_RETRIEVE:
+		retrieve(movies);
+
+		serializer.serialize(movies, ack, reply);
+
+		break;
+	default:
+		break;
+	}
 
 }
 
@@ -33,6 +57,7 @@ void Storage::handleRequest(string& request, string& reply) {
  */
 void Storage::retrieve(MovieList& movies) {
 	movies.addAll(list);
+	std::cout << "Movies retrieved from storage\n";
 }
 
 /**

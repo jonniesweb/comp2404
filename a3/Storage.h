@@ -8,10 +8,13 @@
 #ifndef STORAGE_H_
 #define STORAGE_H_
 
-#include "MovieList.h"
-#include "Movie.h"
+#include <string>
 
-typedef enum UpdateType { DB_ADD, DB_DELETE } UpdateType;
+#include "Defines.h"
+//#include "Movie.h"
+#include "MovieList.h"
+#include "Serializer.h"
+
 
 class Storage {
 public:
@@ -19,12 +22,13 @@ public:
 	virtual ~Storage();
 
 	void handleRequest(string&, string&);
-	void retrieve(MovieList&);
-	void update(UpdateType, MovieList&);
 
 private:
 	MovieList list;
+	Serializer serializer;
 
+	void retrieve(MovieList&);
+	void update(UpdateType, MovieList&);
 };
 
 #endif /* STORAGE_H_ */

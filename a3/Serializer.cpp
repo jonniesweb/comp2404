@@ -10,9 +10,12 @@
 
 #include <iostream>
 #include <sstream>
+#include <string>
 
-#include "Movie.h"
+//#include "Movie.h"
 #include "MovieList.h"
+
+using std::stringstream;
 
 Serializer::Serializer() {
 	// TODO Auto-generated constructor stub
@@ -44,7 +47,7 @@ void Serializer::serialize(MovieList& movieList, UpdateType& action, string& ser
 
 }
 
-static string getcharacters(const string& str, int start, int& newStart) {
+string getcharacters(const string& str, int start, int& newStart) {
 	int i = 0;
 	while (str[start+i] != '*') {
 		i++;
@@ -63,6 +66,10 @@ void Serializer::deserialize(string& serialStr, UpdateType& action, MovieList& m
 		action = DB_ADD;
 	} else if (serialStr[0] == '1') {
 		action = DB_DELETE;
+	} else if (serialStr[0] == '2') {
+		action = DB_RETRIEVE;
+	} else {
+		std::cerr << "Serializer::deserialize read an invalid UpdateType\n";
 	}
 
 	int next;
@@ -210,7 +217,7 @@ char* Serializer::intToChar(int n) {
 }
 
 int Serializer::charToInt(const string& str) {
-	std::stringstream stream(str);
+	stringstream stream(str);
 	int output;
 	stream >> output;
 	return output;

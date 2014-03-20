@@ -8,9 +8,14 @@
 #ifndef SERIALIZER_H_
 #define SERIALIZER_H_
 
-#include <string>
-#include "Storage.h"
-#include "List.h"
+//#include <string>
+
+#include "Defines.h"
+//#include "List.h"
+#include "Movie.h"
+//#include "Storage.h"
+
+class MovieList;
 
 using std::string;
 
@@ -23,16 +28,16 @@ public:
 	void deserialize(string& serialStr, UpdateType& action, MovieList& movieList);
 
 private:
-	static void charToString(char* input, string& output);
-	static void stringToChar(string& input, char** output);
-	static char updateTypeToChar(UpdateType& updateType);
-	static UpdateType charToUpdateType(char);
-	static int GenreToChar(Genre);
-	static Genre CharToGenre(const char*);
-	static int strlen(char *s);
-	static void reverse(char *s);
-	static char* intToChar(int);
-	static int charToInt(const string&);
+	void charToString(char* input, string& output);
+	void stringToChar(string& input, char** output);
+	char updateTypeToChar(UpdateType& updateType);
+	UpdateType charToUpdateType(char);
+	int GenreToChar(Genre);
+	Genre CharToGenre(const char*);
+	int strlen(char *s);
+	void reverse(char *s);
+	char* intToChar(int);
+	int charToInt(const string&);
 };
 
 #endif /* SERIALIZER_H_ */

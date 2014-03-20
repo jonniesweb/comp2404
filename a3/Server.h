@@ -22,6 +22,7 @@ public:
 
 private:
 	Storage db;
+	Serializer serializer;
 };
 
 #endif /* SERVER_H_ */
