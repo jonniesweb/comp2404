@@ -32,7 +32,7 @@ Movie::~Movie() {
 
 Movie::Movie(const Movie& movie) :
 		title(movie.title), year(movie.year), genre(movie.genre) {
-	std::cout << "Movie " << title << " has been copied" << std::endl;
+//	std::cout << "Movie " << title << " has been copied" << std::endl;
 }
 
 /**

@@ -30,33 +30,6 @@ using std::endl;
  */
 Controller::Controller() {
 
-#if 0
-	Serializer s;
-	Movie m ("test", 1864, COMEDY);
-	Movie n ("test2", 1990, HORROR);
-	MovieList list;
-	list.add(m);
-	list.add(n);
-
-	string str;
-	UpdateType type = DB_ADD;
-
-	s.serialize(list, type, str);
-
-	std::cout << str << endl;
-
-	MovieList newMovies;
-	UpdateType action;
-	s.deserialize(str, action, newMovies);
-
-	cout << newMovies.get(0) << endl;
-	cout << newMovies.get(1) << endl;
-
-
-
-#endif
-
-
 #if 1
 
 	bool running = true;
@@ -131,5 +104,5 @@ Controller::Controller() {
 
 
 Controller::~Controller() {
-	std::cout << "program exited successfully" << std::endl;
+//	std::cout << "program exited successfully" << std::endl;
 }

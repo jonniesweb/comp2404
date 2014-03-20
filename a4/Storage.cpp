@@ -57,7 +57,7 @@ void Storage::handleRequest(string& request, string& reply) {
  */
 void Storage::retrieve(MovieList& movies) {
 	movies.addAll(list);
-	std::cout << "Movies retrieved from storage\n";
+//	std::cout << "Movies retrieved from storage\n";
 }
 
 /**
