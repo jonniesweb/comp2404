@@ -20,6 +20,8 @@ public:
 	void addMovies(MovieList&);
 	void removeMovies(MovieList&);
 
+	void shutDown();
+
 private:
 	Storage db;
 	Serializer serializer;

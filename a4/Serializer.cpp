@@ -52,15 +52,7 @@ void Serializer::deserialize(string& serialStr, UpdateType& action, MovieList& m
 	unsigned int i = 2;
 
 	// get update type
-	if (serialStr[0] == '0') {
-		action = DB_ADD;
-	} else if (serialStr[0] == '1') {
-		action = DB_DELETE;
-	} else if (serialStr[0] == '2') {
-		action = DB_RETRIEVE;
-	} else {
-		std::cerr << "Serializer::deserialize read an invalid UpdateType\n";
-	}
+	action = charToUpdateType(serialStr[0]);
 
 	int next;
 	// stop when i is more than length of string
@@ -102,8 +94,17 @@ char Serializer::updateTypeToChar(UpdateType& updateType) {
 	case DB_DELETE:
 		return '1';
 		break;
-	default:
+	case DB_RETRIEVE:
 		return '2';
+		break;
+	case DB_ACK:
+		return '3';
+		break;
+	case DB_SHUTDOWN:
+		return '4';
+		break;
+	default:
+		std::cerr << "Serializer::deserialize read an invalid UpdateType\n";
 		break;
 	}
 	return -1;
@@ -116,6 +117,16 @@ UpdateType Serializer::charToUpdateType(char updateType) {
 		break;
 	case '1':
 		return DB_DELETE;
+		break;
+	case '2':
+		return DB_RETRIEVE;
+		break;
+	case '3':
+		return DB_ACK;
+		break;
+	case '4':
+		return DB_SHUTDOWN;
+		break;
 	default:
 		break;
 	}

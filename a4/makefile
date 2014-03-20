@@ -1,34 +1,38 @@
 CC = clang++
-CFLAGS = -Wall -g3 
+CFLAGS = -Wall -g3 -m32
 
-SRC= \
-Controller.cpp \
-Controller.h   \
-List.h         \
-List.cpp       \
-Main.cpp       \
-Movie.cpp      \
-Movie.h        \
-MovieList.cpp  \
-Serializer.cpp \
-Server.cpp     \
-Server.h       \
-Storage.cpp    \
-Storage.h      \
-View.cpp       \
-View.h         \
-AbstractList.h \
+C_SRC= \
+Controller.cpp    \
+ClientMain.cpp    \
+Movie.cpp         \
+MovieList.cpp     \
+Serializer.cpp    \
+Server.cpp        \
+ServerControl.cpp \
+Storage.cpp       \
+Connection.o      \
+View.cpp
 
+S_SRC= \
+Controller.cpp    \
+Movie.cpp         \
+MovieList.cpp     \
+Serializer.cpp    \
+Server.cpp        \
+ServerControl.cpp \
+ServerMain.cpp    \
+Storage.cpp       \
+Connection.o      \
+View.cpp
 
+all: clean client server
 
-all: mdb
+client:
+	$(CC) $(CFLAGS) -o $@ $(C_SRC)
 
-#mdb: $(SRC)
-#	$(CC) $(CFLAGS) -o $@ $(SRC)
-
-mdb: clean
-	$(CC) $(CFLAGS) -o $@ *.cpp
+server:
+	$(CC) $(CFLAGS) -o $@ $(S_SRC)
 
 clean:
-	rm -vfr *.o mdb
+	rm -vfr client server 
 

@@ -124,6 +124,7 @@ Controller::Controller() {
 			view.listMoviesReverse(allMovies);
 
 		} else if (menuChoice == 0) { // exit
+			movieStore.shutDown();
 			running = false;
 
 		} else {

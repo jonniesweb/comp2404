@@ -24,7 +24,6 @@ Server::~Server() {
  * @param movies
  */
 void Server::getAllMovies(MovieList& movies) {
-//	db.retrieve(movies);
 	UpdateType action = DB_RETRIEVE;
 	string serial;
 	serializer.serialize(movies, action, serial);
@@ -39,7 +38,6 @@ void Server::getAllMovies(MovieList& movies) {
  * @param movies
  */
 void Server::addMovies(MovieList& movies) {
-//	db.update(DB_ADD, movies);
 	UpdateType action = DB_ADD;
 	string serial;
 	serializer.serialize(movies, action, serial);
@@ -54,8 +52,18 @@ void Server::addMovies(MovieList& movies) {
  * @param movies
  */
 void Server::removeMovies(MovieList& movies) {
-//	db.update(DB_DELETE, movies);
 	UpdateType action = DB_DELETE;
+	string serial;
+
+	serializer.serialize(movies, action, serial);
+
+	string unused;
+	db.handleRequest(serial, unused);
+}
+
+void Server::shutDown() {
+	MovieList movies;
+	UpdateType action = DB_SHUTDOWN;
 	string serial;
 
 	serializer.serialize(movies, action, serial);
