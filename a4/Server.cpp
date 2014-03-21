@@ -9,14 +9,27 @@
  */
 
 #include "Server.h"
-#include "List.h"
-#include "Serializer.h"
-#include "Defines.h"
 
-Server::Server() {
+#include <string>
+
+#include "Defines.h"
+#include <cstdlib>
+
+using std::cout;
+
+Server::Server(const string host, int port) {
+	bool result = net.open(host, port);
+
+	if (result) {
+//		cout << "connected to server\n";
+	} else {
+		cout << "failed to connect to server\n";
+		exit(EXIT_FAILURE);
+	}
 }
 
 Server::~Server() {
+	net.closeConn();
 }
 
 /**
@@ -28,9 +41,22 @@ void Server::getAllMovies(MovieList& movies) {
 	string serial;
 	serializer.serialize(movies, action, serial);
 
+	net.transmit(serial);
+
+	if (!net.good()) {
+		std::cerr << "Bad things happened in the magic code when transmitting movies to get\n";
+	}
+
 	string response;
-	db.handleRequest(serial, response);
+	net.receive(response);
+
+	if (!net.good()) {
+		std::cerr << "Bad things happened in the magic code when receiving movies\n";
+	}
+
 	serializer.deserialize(response, action, movies);
+
+
 }
 
 /**
@@ -42,8 +68,10 @@ void Server::addMovies(MovieList& movies) {
 	string serial;
 	serializer.serialize(movies, action, serial);
 
-	string unused;
-	db.handleRequest(serial, unused);
+	net.transmit(serial);
+	if (!net.good()) {
+		std::cerr << "Bad things happened in the magic code when transmitting movies to add\n";
+	}
 
 }
 
@@ -57,10 +85,15 @@ void Server::removeMovies(MovieList& movies) {
 
 	serializer.serialize(movies, action, serial);
 
-	string unused;
-	db.handleRequest(serial, unused);
+	net.transmit(serial);
+	if (!net.good()) {
+		std::cerr << "Bad things happened in the magic code when transmitting movies to remove\n";
+	}
 }
 
+/**
+ * Send a shutdown message to the server to shut it down
+ */
 void Server::shutDown() {
 	MovieList movies;
 	UpdateType action = DB_SHUTDOWN;
@@ -68,6 +101,6 @@ void Server::shutDown() {
 
 	serializer.serialize(movies, action, serial);
 
-	string unused;
-	db.handleRequest(serial, unused);
+	net.transmit(serial);
+
 }

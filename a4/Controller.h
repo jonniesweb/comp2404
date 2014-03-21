@@ -8,9 +8,9 @@
 #ifndef CONTROLLER_H_
 #define CONTROLLER_H_
 
-#include "View.h"
-#include "Server.h"
 #include "List.h"
+#include "Server.h"
+#include "View.h"
 
 using std::string;
 
@@ -20,7 +20,7 @@ public:
 	virtual ~Controller();
 
 private:
-	Server movieStore; // server copy
+	Server movieStore;
 	View view;
 
 };

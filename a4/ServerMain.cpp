@@ -9,6 +9,7 @@
 
 int main(int argc, char **argv) {
 	ServerControl server;
+	server.launch();
 
 
 }

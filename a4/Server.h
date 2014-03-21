@@ -8,12 +8,13 @@
 #ifndef SERVER_H_
 #define SERVER_H_
 
-#include "Storage.h"
 #include "MovieList.h"
+#include "Connection.h"
+#include "Serializer.h"
 
 class Server {
 public:
-	Server();
+	Server(const string, int);
 	virtual ~Server();
 
 	void getAllMovies(MovieList&);
@@ -23,8 +24,8 @@ public:
 	void shutDown();
 
 private:
-	Storage db;
 	Serializer serializer;
+	ClientConnection net;
 };
 
 #endif /* SERVER_H_ */

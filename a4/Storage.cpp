@@ -14,6 +14,7 @@
 //#include <string>
 
 #include "Movie.h"
+#include <cstdlib>
 //#include "MovieList.h"
 //#include "Serializer.h"
 
@@ -44,6 +45,9 @@ void Storage::handleRequest(string& request, string& reply) {
 
 		serializer.serialize(movies, ack, reply);
 
+		break;
+	case DB_SHUTDOWN:
+		exit(EXIT_SUCCESS);
 		break;
 	default:
 		break;

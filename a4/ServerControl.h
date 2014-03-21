@@ -9,6 +9,7 @@
 #define SERVERCONTROL_H_
 
 #include "Connection.h"
+#include "Storage.h"
 
 class ServerControl {
 public:
@@ -18,7 +19,10 @@ public:
 	void launch();
 
 private:
+	void goodCheck();
+
 	ServerConnection net;
+	Storage storage;
 };
 
 #endif /* SERVERCONTROL_H_ */

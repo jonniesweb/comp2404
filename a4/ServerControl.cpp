@@ -10,14 +10,18 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
-#define SERVER_PORT 60002
+#include "Defines.h"
+
+using std::cout;
 
 ServerControl::ServerControl() {
 
 }
 
 ServerControl::~ServerControl() {
+	net.closeConn();
 }
 
 void ServerControl::launch() {
@@ -25,18 +29,41 @@ void ServerControl::launch() {
 	bool running = false;
 	bool result = net.open(SERVER_PORT);
 
-	std::cout << result;
+	goodCheck();
 
 	if (result) {
+		cout << "binded to port\n";
 		running = true;
 	}
 
 	while (running) {
 
-		std::cout << net.wait();
-		string input;
-		net.receive(input);
+		goodCheck();
 
-		std::cout << input;
+		net.wait();
+
+		goodCheck();
+
+		while (net.good()) {
+			string input;
+			net.receive(input);
+			cout << input;
+
+			string output;
+			storage.handleRequest(input, output);
+
+			if (output.size() > 0) {
+				net.transmit(output);
+
+				goodCheck();
+			}
+		}
+	}
+}
+
+void ServerControl::goodCheck() {
+	if (!net.good()) {
+		cout << "Things have gone bad! Exiting...\n";
+		exit(EXIT_FAILURE);
 	}
 }

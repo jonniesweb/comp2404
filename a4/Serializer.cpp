@@ -101,7 +101,7 @@ char Serializer::updateTypeToChar(UpdateType& updateType) {
 		return '3';
 		break;
 	case DB_SHUTDOWN:
-		return '4';
+		return '4'; // Use 4 because using '-1' is impossible. jeez what is she thinking?
 		break;
 	default:
 		std::cerr << "Serializer::deserialize read an invalid UpdateType\n";
@@ -124,7 +124,7 @@ UpdateType Serializer::charToUpdateType(char updateType) {
 	case '3':
 		return DB_ACK;
 		break;
-	case '4':
+	case '4': // Use 4 because using '-1' is impossible. jeez what is she thinking?
 		return DB_SHUTDOWN;
 		break;
 	default:

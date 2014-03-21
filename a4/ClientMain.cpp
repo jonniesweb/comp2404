@@ -8,7 +8,7 @@
  */
 
 #include "Controller.h"
-
+#if 1
 int main(int argc, char **argv) {
 	Controller c;
 
@@ -16,3 +16,4 @@ int main(int argc, char **argv) {
 }
 
 
+#endif

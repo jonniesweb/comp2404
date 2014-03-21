@@ -12,14 +12,14 @@
 
 #include "Controller.h"
 
-//#include <cstdlib>
-#include <iostream>
+//#include <iostream>
 #include <string>
 
 #include "Movie.h"
 #include "MovieList.h"
 #include "Serializer.h"
 #include "Storage.h"
+#include "Defines.h"
 
 using std::string;
 using std::cout;
@@ -28,40 +28,7 @@ using std::endl;
 /**
  * Constructor handles program flow. Gets user menu choice then acts on that.
  */
-Controller::Controller() {
-
-#if 0
-	MovieList movies;
-	Movie m("test1", 123, COMEDY);
-	Movie n("test2", 413, HORROR);
-//	movies.add(m);
-//	movies.add(n);
-	movies += &m;
-
-	MovieList movies2 = movies;
-
-
-	view.listMovies(movies2);
-	cout << "test" << endl;
-	movies += &n;
-	movies -= &m;
-	view.listMovies(movies);
-
-//
-//	Movie o("test3", 5243, SF);
-//	movies2.add(o);
-//
-//	MovieList movies3 = movies2 = movies;
-//	cout << "ML2:\n";
-//	view.listMovies(movies2);
-//
-//	cout << "ML3:\n";
-//	view.listMovies(movies3);
-
-
-#endif
-
-
+Controller::Controller() : movieStore(Server("127.0.0.1", SERVER_PORT)) {
 
 #if 1
 
