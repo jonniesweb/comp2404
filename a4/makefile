@@ -1,8 +1,8 @@
-CC = clang++
-CFLAGS = -Wall -g3 -m32
+CC = g++
+CFLAGS =  -m32
 
 C_SRC= \
-Controller.cpp    \
+ClientController.cpp    \
 ClientMain.cpp    \
 Movie.cpp         \
 MovieList.cpp     \
@@ -14,7 +14,7 @@ Connection.o      \
 View.cpp
 
 S_SRC= \
-Controller.cpp    \
+ClientController.cpp    \
 Movie.cpp         \
 MovieList.cpp     \
 Serializer.cpp    \

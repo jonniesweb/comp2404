@@ -11,20 +11,14 @@
 #include "Storage.h"
 
 #include <iostream>
-//#include <string>
 
 #include "Movie.h"
 #include <cstdlib>
-//#include "MovieList.h"
-//#include "Serializer.h"
 
 Storage::Storage() {
 }
 
 Storage::~Storage() {
-//	for (int i = 0; i < list.getSize(); ++i) {
-//		delete &list.get(i);
-//	}
 }
 
 void Storage::handleRequest(string& request, string& reply) {

@@ -16,7 +16,7 @@ using std::string;
 
 class Controller {
 public:
-	Controller();
+	Controller(string host);
 	virtual ~Controller();
 
 private:

@@ -7,13 +7,12 @@
  * Movie Database Program initializer. Creates an instance of Controller.
  */
 
+
 #include "Controller.h"
-#if 1
+
 int main(int argc, char **argv) {
-	Controller c;
+
+	Controller c("127.0.0.1");
 
 	return 0;
 }
-
-
-#endif

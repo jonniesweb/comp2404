@@ -47,7 +47,6 @@ void ServerControl::launch() {
 		while (net.good()) {
 			string input;
 			net.receive(input);
-			cout << input;
 
 			string output;
 			storage.handleRequest(input, output);

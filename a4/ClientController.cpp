@@ -28,7 +28,7 @@ using std::endl;
 /**
  * Constructor handles program flow. Gets user menu choice then acts on that.
  */
-Controller::Controller() : movieStore(Server("127.0.0.1", SERVER_PORT)) {
+Controller::Controller(string host) : movieStore(Server(host, SERVER_PORT)) {
 
 #if 1
 
