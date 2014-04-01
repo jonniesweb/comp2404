@@ -1,0 +1,68 @@
+*******************************************************************************
+
+              Jonathan Simpson - COMP 2404 - Assignment 4
+              
+*******************************************************************************
+
+
+Preamble
+--------
+
+A movie database program! Classes adhere to MVC. The user is presented a menu
+to select a slew of operations (add, delete, view, search-view, exit). Adding
+a movie requires entering the name, year and genre of the movie. 
+
+
+Compilation Command
+-------------------
+
+Run the following command in the root directory of the files:
+
+  make
+
+Run the following command to clear the generated build and runtime files:
+
+make clean
+
+
+Launching and Operating Instructions
+------------------------------------
+
+First launch the server process by entering
+
+	./server
+
+Then launch the client process by entering
+
+	./client
+
+It only works on the same computer since it was unspecified.
+
+Adding a single or multiple movies to the database is done by entering 1 from
+the main menu, entering in how many movies you would like to add, then entering
+in the respective title, year and genre for each movie.
+
+Delete a movie that is in the database by entering 2 for "Delete a movie", then
+entering the full title of the movie to delete.
+
+Display all of the movies currently in the database by entering 3 for "List all
+movies" from the main menu.
+
+List all movies of a specific genre by entering 4 at the main menu for "List all
+movies by genre" and then entering the respective genre you are interested
+in showing.
+
+Exit the program by entering 0 for "Quit" at the main menu. The server will
+stop execution as well.
+
+
+Files Included
+--------------
+
+Root Dir
+ |-> ClientMain.cpp
+ |-> Connection.h
+ |-> Controller.cpp
+ |-> Controller.h |-> Defines.h |-> List.h |-> ListNode.h |-> Movie.cpp |-> Movie.h |-> MovieList.cpp |-> MovieList.h |-> Serializer.cpp |-> Serializer.h |-> Server.cpp |-> Server.h |-> ServerControl.cpp |-> ServerControl.h |-> ServerMain.cpp |-> Storage.cpp |-> Storage.h |-> View.cpp |-> View.h |-> Connection.o |-> Doxyfile |-> makefile
+ |-> 2404 a4 uml.pdf
+ |-> 2404 a4 uml.png \-> README
