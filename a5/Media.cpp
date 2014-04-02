@@ -22,3 +22,11 @@ string& Media::getTitle() {
 int Media::getYear() const {
 	return year;
 }
+
+bool Media::operator==(Media& media) {
+	if (media.title.compare(title) == 0 && media.year == year) {
+		return true;
+	} else {
+		return false;
+	}
+}

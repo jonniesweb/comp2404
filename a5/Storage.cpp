@@ -20,7 +20,7 @@ Storage::~Storage() {
  * Get all movies from the List
  * @param movies
  */
-void Storage::retrieve(MovieList& movies) {
+void Storage::retrieve(List<Media>& movies) {
 	movies += list;
 //	std::cout << "Movies retrieved from storage\n";
 }
@@ -31,7 +31,7 @@ void Storage::retrieve(MovieList& movies) {
  * @param updateType
  * @param movies
  */
-void Storage::update(UpdateType updateType, MovieList& movies) {
+void Storage::update(UpdateType updateType, List<Media>& movies) {
 
 	switch (updateType) {
 	case DB_ADD:

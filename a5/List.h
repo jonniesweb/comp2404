@@ -73,7 +73,7 @@ public:
 		ListNode<T>* n = list.tail;
 
 		while (n != null) {
-			add(n->getElement());
+			add(*n->getElement());
 			n = n->getNext();
 		}
 	}
@@ -134,7 +134,7 @@ public:
 	 * @param element
 	 * @return If found: the element. If not found: Null
 	 */
-	void remove(const T& element) {
+	void remove(T& element) {
 		ListNode<T>* node = head;
 		int i = 0;
 
@@ -172,7 +172,7 @@ public:
 		ListNode<T>* node = list.head;
 
 		while (node != null) {
-			remove(node->getElement());
+			remove(*node->getElement());
 
 			node = node->getNext();
 		}
@@ -211,12 +211,12 @@ public:
 
 	List<T>& operator+=(T& element) {
 		add(element);
-		return this;
+		return *this;
 	}
 
 	List<T>& operator+=(List<T>& list) {
 		addAll(list);
-		return this;
+		return *this;
 	}
 
 	List<T>& operator-=(T& element) {
@@ -226,7 +226,7 @@ public:
 
 	List<T>& operator-=(List<T>& list) {
 		removeAll(list);
-		return this;
+		return *this;
 	}
 
 	List<T>& operator+(T& element) {

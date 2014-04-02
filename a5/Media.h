@@ -17,6 +17,7 @@ public:
 	virtual ~Media();
 	string& getTitle();
 	int getYear() const;
+	bool operator==(Media&);
 
 protected:
 	Media(const string& title, const int year);

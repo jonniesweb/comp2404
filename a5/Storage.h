@@ -10,7 +10,8 @@
 
 
 #include "Defines.h"
-#include "MovieList.h"
+#include "List.h"
+#include "Media.h"
 
 class Storage {
 public:
@@ -18,10 +19,10 @@ public:
 	virtual ~Storage();
 
 
-	void retrieve(MovieList&);
-	void update(UpdateType, MovieList&);
+	void retrieve(List<Media>&);
+	void update(UpdateType, List<Media>&);
 private:
-	MovieList list;
+	List<Media> list;
 
 };
 

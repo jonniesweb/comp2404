@@ -8,7 +8,6 @@
  */
 
 #include "View.h"
-#include "MovieList.h"
 
 #include <iostream>
 #include <sstream>
@@ -25,6 +24,15 @@ View::View() {
 
 View::~View() {
 
+}
+
+int View::getMediaType() {
+	cout << endl;
+	cout << "Would you like to manage Movies or Books?" << endl;
+	cout << "( 1 )  Movies" << endl;
+	cout << "( 2 )  Books" << endl;
+
+	return getInt();
 }
 
 /**
@@ -114,7 +122,7 @@ int View::getInt() {
  * Get a user specified amount of movies from the user
  * @param movies
  */
-void View::getMovies(MovieList& movies) {
+void View::getMovies(List<Media>& movies) {
 	cout << endl;
 	cout << "Enter the number of movies to enter:" << endl;
 	int numMovies = getInt();
@@ -134,7 +142,7 @@ void View::getMovies(MovieList& movies) {
 
 		// create and add the movie to the list
 		Movie movie(title, year, genre);
-		movies += &movie;
+		movies += movie;
 	}
 
 }
@@ -149,31 +157,31 @@ string View::deleteMovie() {
 	return getString();
 }
 
-/**
- * Output an array of movies to the user
- * @param movies
- */
-const void View::listMovies(MovieList& movies) {
-
-	for (int i = 0; i < movies.getSize(); ++i) {
-		Movie& movie = movies.get(i);
-		cout << endl;
-		cout << "Title: " << movie.getTitle() << endl;
-		cout << "Year:  " << movie.getYear() << endl;
-		cout << "Genre: " << genreToString(movie.getGenre()) << endl;
-	}
-
-}
-
-const void View::listMoviesReverse(MovieList& movies) {
-	for (int i = movies.getSize() - 1; i > -1; --i) {
-		Movie& movie = movies.get(i);
-				cout << endl;
-				cout << "Title: " << movie.getTitle() << endl;
-				cout << "Year:  " << movie.getYear() << endl;
-				cout << "Genre: " << genreToString(movie.getGenre()) << endl;
-	}
-}
+///**
+// * Output an array of movies to the user
+// * @param movies
+// */
+//const void View::listMovies(List<Media>& movies) {
+//
+//	for (int i = 0; i < movies.getSize(); ++i) {
+//		Movie& movie = movies.get(i);
+//		cout << endl;
+//		cout << "Title: " << movie.getTitle() << endl;
+//		cout << "Year:  " << movie.getYear() << endl;
+//		cout << "Genre: " << genreToString(movie.getGenre()) << endl;
+//	}
+//
+//}
+//
+//const void View::listMoviesReverse(List<Media>& movies) {
+//	for (int i = movies.getSize() - 1; i > -1; --i) {
+//		Movie& movie = movies.get(i);
+//				cout << endl;
+//				cout << "Title: " << movie.getTitle() << endl;
+//				cout << "Year:  " << movie.getYear() << endl;
+//				cout << "Genre: " << genreToString(movie.getGenre()) << endl;
+//	}
+//}
 
 /**
  * Convert a Genre type to a string
@@ -184,36 +192,31 @@ string View::genreToString(Genre genre) {
 	switch (genre) {
 	case COMEDY:
 		return "Comedy";
-		break;
 
 	case ACTION:
 		return "Action";
-		break;
 
 	case HORROR:
 		return "Horror";
-		break;
 
 	case DRAMA:
 		return "Drama";
 
 	case SF:
 		return "Science-Fiction";
-		break;
 
 	case ADVENTURE:
 		return "Adventure";
-		break;
 
 	case WESTERN:
 		return "Western";
-		break;
 
 	case UNKNOWN: // fallthrough
 	default:
 		return "Unknown";
-		break;
 	}
+
+	return "Unknown";
 }
 
 /**

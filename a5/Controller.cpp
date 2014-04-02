@@ -14,9 +14,13 @@
 
 #include <string>
 
+#include "BookFactory.h"
+#include "BookInputBehaviour.h"
 #include "Defines.h"
-#include "Movie.h"
-#include "MovieList.h"
+#include "List.h"
+#include "Media.h"
+#include "MovieFactory.h"
+#include "MovieInputBehaviour.h"
 
 using std::string;
 using std::cout;
@@ -31,28 +35,51 @@ Controller::Controller() {
 
 	bool running = true;
 	int menuChoice = -1;
+	int mediaChoice = -1;
+
+	InputBehaviour* mediaBehaviour;
+	MediaFactory* mediaFactory;
+
+	// determine what type of media user wants to manage
+	do {
+		mediaChoice = view.getMediaType();
+	} while (mediaChoice >= 1 && mediaChoice <= 2);
+
+	switch (mediaChoice) {
+		case 1:
+			mediaBehaviour = new MovieInputBehaviour;
+			mediaFactory = new MovieFactory;
+			break;
+		case 2:
+			mediaBehaviour = new BookInputBehaviour;
+			mediaFactory = new BookFactory;
+			break;
+		default:
+			break;
+	}
+
 
 	do {
 		menuChoice = view.getMenuChoice();
 
 		if (menuChoice == 1) { // add media
 
-			MovieList newMovies;
+			List<Media> newMovies;
 			view.getMovies(newMovies);
 
 			storage.update(DB_ADD, newMovies);
 
 		} else if (menuChoice == 2) { // delete media
 
-			MovieList removedMovies;
+			List<Media> removedMovies;
 			string movieTitle = view.deleteMovie();
 
-			MovieList movieList;
+			List<Media> movieList;
 			storage.retrieve(movieList);
 
 			for (int i = 0; i < movieList.getSize(); ++i) {
 				if (movieList.get(i).getTitle().compare(movieTitle) == 0) {
-					removedMovies += &movieList.get(i);
+					removedMovies += movieList.get(i);
 				}
 			}
 
@@ -60,16 +87,16 @@ Controller::Controller() {
 
 		} else if (menuChoice == 3) { // list all media
 
-			MovieList allMovies;
+			List<Media> allMovies;
 			storage.retrieve(allMovies);
 
-			view.listMovies(allMovies);
+//			view.listMovies(allMovies); XXX: temp
 
 		} else if (menuChoice == 4) { // list all media in reverse
-			MovieList allMovies;
+			List<Media> allMovies;
 			storage.retrieve(allMovies);
 
-			view.listMoviesReverse(allMovies);
+//			view.listMoviesReverse(allMovies); XXX: temp
 
 		} else if (menuChoice == 0) { // exit
 			running = false;

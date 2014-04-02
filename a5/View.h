@@ -8,9 +8,11 @@
 #ifndef VIEW_H_
 #define VIEW_H_
 
-#include <string>
+//#include <string>
+
+#include "List.h"
+#include "Media.h"
 #include "Movie.h"
-#include "MovieList.h"
 
 using std::string;
 
@@ -18,19 +20,21 @@ class View {
 public:
 	View();
 	~View();
-	const void listMovies(MovieList&);
-	const void listMoviesReverse(MovieList&);
+	int getMediaType();
+//	const void listMovies(List<Media>&);
+//	const void listMoviesReverse(List<Media>&);
 	int getMenuChoice();
 	void displayMessage(const string&);
-	void getMovies(MovieList&);
+	void getMovies(List<Media>&);
 	string deleteMovie();
 	Genre getGenre();
+
+	static string getString();
+	static int getInt();
 
 private:
 
 	Movie& getMovie();
-	string getString();
-	int getInt();
 	void displayMenu();
 	string genreToString(Genre);
 };
