@@ -3,6 +3,11 @@
  *
  *  Created on: Feb 16, 2014
  *      Author: jon
+ *
+ *  List class, stores anything.
+ *  Created this templated List class since Assignment 3. Previously this list
+ *  has been used to store non-pointer types. It still works perfectly fine with
+ *  pointers even though some of the code takes pointer references.
  */
 
 #ifndef LIST_H_
@@ -70,7 +75,7 @@ public:
 
 	void addAll(List<T>& list) {
 
-		ListNode<T>* n = list.tail;
+		ListNode<T>* n = list.head;
 
 		while (n != null) {
 			add(*n->getElement());
@@ -229,25 +234,25 @@ public:
 		return *this;
 	}
 
-	List<T>& operator+(T& element) {
+	List<T> operator+(T& element) {
 		List<T> list;
 		list.add(element);
 		return list;
 	}
 
-	List<T>& operator+(List<T>& element) {
+	List<T> operator+(List<T>& element) {
 		List<T> list;
 		list.addAll(element);
 		return list;
 	}
 
-	List<T>& operator-(T& element) {
+	List<T> operator-(T& element) {
 		List<T> list;
 		list.remove(element);
 		return list;
 	}
 
-	List<T>& operator-(List<T>& element) {
+	List<T> operator-(List<T>& element) {
 		List<T> list;
 		list.removeAll(element);
 		return list;

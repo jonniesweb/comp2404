@@ -152,7 +152,7 @@ int View::getInt() {
  * Get a user specified amount of media items from the user
  * @param mediaList
  */
-void View::getMedia(List<Media>& mediaList) {
+void View::getMedia(List<Media*>& mediaList) {
 	cout << endl;
 	cout << "Enter the number of items to enter:" << endl;
 	int numItems = getInt();
@@ -165,8 +165,8 @@ void View::getMedia(List<Media>& mediaList) {
 		Media* media;
 		mediaFactory->createData(values, &media);
 
-		mediaList += *media;
-		delete media;
+		mediaList += media;
+//		delete media;
 	}
 
 }
@@ -185,21 +185,21 @@ string View::deleteMedia() {
  * Output an array of items to the user
  * @param medias
  */
-const void View::listMedia(List<Media>& medias) {
+const void View::listMedia(List<Media*>& medias) {
 
 	for (int i = 0; i < medias.getSize(); ++i) {
-		Media& media = medias.get(i);
+		Media* media = medias.get(i);
 		cout << endl;
-		cout << media;
+		cout << *media;
 	}
 
 }
 
-const void View::listMediaReverse(List<Media>& medias) {
+const void View::listMediaReverse(List<Media*>& medias) {
 	for (int i = medias.getSize() - 1; i > -1; --i) {
-		Media& media = medias.get(i);
+		Media* media = medias.get(i);
 		cout << endl;
-		cout << media;
+		cout << *media;
 	}
 }
 

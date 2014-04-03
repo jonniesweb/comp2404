@@ -1,4 +1,4 @@
-CC = clang++
+CC = g++
 CFLAGS = -Wall -g3 
 
 SRC= \
@@ -31,3 +31,5 @@ mdb: clean
 clean:
 	rm -vfr *.o mdb
 
+valgrind: mdb
+	valgrind --leak-check=full --track-origins=yes ./mdb

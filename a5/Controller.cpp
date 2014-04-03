@@ -64,21 +64,23 @@ Controller::Controller() {
 
 		if (menuChoice == 1) { // add media
 
-			List<Media> newMedia;
+			List<Media*> newMedia;
 			view.getMedia(newMedia);
 
 			storage.update(DB_ADD, newMedia);
 
 		} else if (menuChoice == 2) { // delete media
 
-			List<Media> removedMedia;
+			List<Media*> removedMedia;
 			string mediaTitle = view.deleteMedia();
 
-			List<Media> mediaList;
+			List<Media*> mediaList;
 			storage.retrieve(mediaList);
 
 			for (int i = 0; i < mediaList.getSize(); ++i) {
-				if (mediaList.get(i).getTitle().compare(mediaTitle) == 0) {
+				Media* med = mediaList.get(i);
+
+				if (med->getTitle().compare(mediaTitle) == 0) {
 					removedMedia += mediaList.get(i);
 				}
 			}
@@ -87,13 +89,13 @@ Controller::Controller() {
 
 		} else if (menuChoice == 3) { // list all media
 
-			List<Media> allMedia;
+			List<Media*> allMedia;
 			storage.retrieve(allMedia);
 
 			view.listMedia(allMedia);
 
 		} else if (menuChoice == 4) { // list all media in reverse
-			List<Media> allMedia;
+			List<Media*> allMedia;
 			storage.retrieve(allMedia);
 
 			view.listMediaReverse(allMedia);

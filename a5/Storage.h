@@ -19,10 +19,10 @@ public:
 	virtual ~Storage();
 
 
-	void retrieve(List<Media>&);
-	void update(UpdateType, List<Media>&);
+	void retrieve(List<Media*>&);
+	void update(UpdateType, List<Media*>&);
 private:
-	List<Media> list;
+	List<Media*> list;
 
 };
 

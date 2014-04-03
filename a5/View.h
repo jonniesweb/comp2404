@@ -24,11 +24,11 @@ public:
 	View();
 	~View();
 	int getMediaType();
-	const void listMedia(List<Media>&);
-	const void listMediaReverse(List<Media>&);
+	const void listMedia(List<Media*>&);
+	const void listMediaReverse(List<Media*>&);
 	int getMenuChoice();
 	void displayMessage(const string&);
-	void getMedia(List<Media>&);
+	void getMedia(List<Media*>&);
 	string deleteMedia();
 	Genre getGenre();
 
