@@ -20,7 +20,6 @@ using std::ostream;
 
 class Movie: public Media {
 
-friend ostream& operator<<(ostream&, Movie&);
 
 public:
 	Movie(const string&, const int, const Genre);
@@ -29,6 +28,7 @@ public:
 
 	Genre getGenre() const;
 	bool operator==(const Movie& movie);
+	virtual void print(ostream&) const;
 
 private:
 	Genre genre;

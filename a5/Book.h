@@ -16,6 +16,7 @@ public:
 	virtual ~Book();
 	string& getAuthor();
 	string& getIsbn();
+	virtual void print(ostream&) const;
 
 private:
 	string author;

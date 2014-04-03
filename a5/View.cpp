@@ -4,13 +4,20 @@
  *  Created on: Jan 31, 2014
  *      Author: jon
  *
- * Manages user I/O in an MVC Movie Database program.
+ * Manages user I/O in an MVC Media Database program.
  */
 
 #include "View.h"
 
 #include <iostream>
 #include <sstream>
+#include <string>
+#include <vector>
+
+#include "BookFactory.h"
+#include "BookInputBehaviour.h"
+#include "MovieFactory.h"
+#include "MovieInputBehaviour.h"
 
 using std::cout;
 using std::cin;
@@ -18,11 +25,34 @@ using std::endl;
 using std::getline;
 using std::string;
 using std::stringstream;
+using std::vector;
 
 View::View() {
+
+	int mediaChoice = -1;
+
+	// determine what type of media user wants to manage
+	do {
+		mediaChoice = getMediaType();
+	} while (mediaChoice < 1 || mediaChoice > 2);
+
+	switch (mediaChoice) {
+	case 1:
+		mediaBehaviour = new MovieInputBehaviour;
+		mediaFactory = new MovieFactory;
+		break;
+	case 2:
+		mediaBehaviour = new BookInputBehaviour;
+		mediaFactory = new BookFactory;
+		break;
+	default:
+		break;
+	}
 }
 
 View::~View() {
+	delete mediaBehaviour;
+	delete mediaFactory;
 
 }
 
@@ -41,10 +71,10 @@ int View::getMediaType() {
  */
 int View::getMenuChoice() {
 	cout << endl;
-	cout << "( 1 )  Add movies" << endl;
-	cout << "( 2 )  Delete a movie" << endl;
-	cout << "( 3 )  List all movies" << endl;
-	cout << "( 4 )  List all movies in reverse" << endl;
+	cout << "( 1 )  Add media" << endl;
+	cout << "( 2 )  Delete an item" << endl;
+	cout << "( 3 )  List all media" << endl;
+	cout << "( 4 )  List all media in reverse" << endl;
 	cout << "( 0 )  Exit" << endl;
 
 	return getInt();
@@ -119,69 +149,59 @@ int View::getInt() {
 }
 
 /**
- * Get a user specified amount of movies from the user
- * @param movies
+ * Get a user specified amount of media items from the user
+ * @param mediaList
  */
-void View::getMovies(List<Media>& movies) {
+void View::getMedia(List<Media>& mediaList) {
 	cout << endl;
-	cout << "Enter the number of movies to enter:" << endl;
-	int numMovies = getInt();
+	cout << "Enter the number of items to enter:" << endl;
+	int numItems = getInt();
 
-	for (int j = 0; j < numMovies; ++j) {
+	for (int j = 0; j < numItems; ++j) {
 
-		// get info for the movie
-		cout << endl;
-		cout << "Enter movie title:" << endl;
-		string title = getString();
+		vector<void*> values;
+		mediaBehaviour->getMediaData(values);
 
-		cout << endl;
-		cout << "Enter movie year:" << endl;
-		int year = getInt();
+		Media* media;
+		mediaFactory->createData(values, &media);
 
-		Genre genre = getGenre();
-
-		// create and add the movie to the list
-		Movie movie(title, year, genre);
-		movies += movie;
+		mediaList += *media;
+		delete media;
 	}
 
 }
 
 /**
- * Get the title of a movie to remove from the user
+ * Get the title of a media item to remove from the user
  * @return
  */
-string View::deleteMovie() {
+string View::deleteMedia() {
 	cout << endl;
-	cout << "Enter the movie's title to remove" << endl;
+	cout << "Enter the item's title to remove" << endl;
 	return getString();
 }
 
-///**
-// * Output an array of movies to the user
-// * @param movies
-// */
-//const void View::listMovies(List<Media>& movies) {
-//
-//	for (int i = 0; i < movies.getSize(); ++i) {
-//		Movie& movie = movies.get(i);
-//		cout << endl;
-//		cout << "Title: " << movie.getTitle() << endl;
-//		cout << "Year:  " << movie.getYear() << endl;
-//		cout << "Genre: " << genreToString(movie.getGenre()) << endl;
-//	}
-//
-//}
-//
-//const void View::listMoviesReverse(List<Media>& movies) {
-//	for (int i = movies.getSize() - 1; i > -1; --i) {
-//		Movie& movie = movies.get(i);
-//				cout << endl;
-//				cout << "Title: " << movie.getTitle() << endl;
-//				cout << "Year:  " << movie.getYear() << endl;
-//				cout << "Genre: " << genreToString(movie.getGenre()) << endl;
-//	}
-//}
+/**
+ * Output an array of items to the user
+ * @param medias
+ */
+const void View::listMedia(List<Media>& medias) {
+
+	for (int i = 0; i < medias.getSize(); ++i) {
+		Media& media = medias.get(i);
+		cout << endl;
+		cout << media;
+	}
+
+}
+
+const void View::listMediaReverse(List<Media>& medias) {
+	for (int i = medias.getSize() - 1; i > -1; --i) {
+		Media& media = medias.get(i);
+		cout << endl;
+		cout << media;
+	}
+}
 
 /**
  * Convert a Genre type to a string

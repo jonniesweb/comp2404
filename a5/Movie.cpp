@@ -9,6 +9,11 @@
 
 #include "Movie.h"
 #include "Media.h"
+#include <sstream>
+
+using std::stringstream;
+using std::endl;
+
 
 //#include <iostream>
 //#include <string>
@@ -45,8 +50,53 @@ bool Movie::operator==(const Movie& movie) {
 	return (movie.genre == genre && movie.title == title && movie.year == year);
 }
 
-ostream& operator<<(ostream& os, Movie& movie) {
-	os << "title: " << movie.getTitle() << " year: " << movie.getYear()
-			<< " genre: " << movie.getGenre();
-	return os;
+void Movie::print(ostream& ss) const {
+	ss << "Title: ";
+	ss << title;
+	ss << endl;
+	ss << "Year:  ";
+	ss << year;
+	ss << endl;
+
+	Genre genre = this->genre;
+	string strGenre;
+	switch (genre) {
+		case COMEDY:
+			strGenre = "Comedy";
+			break;
+
+		case ACTION:
+			strGenre = "Action";
+			break;
+
+		case HORROR:
+			strGenre = "Horror";
+			break;
+
+		case DRAMA:
+			strGenre = "Drama";
+			break;
+
+		case SF:
+			strGenre = "Science-Fiction";
+			break;
+
+		case ADVENTURE:
+			strGenre = "Adventure";
+			break;
+
+		case WESTERN:
+			strGenre = "Western";
+			break;
+
+		case UNKNOWN: // fallthrough
+		default:
+			strGenre = "Unknown";
+			break;
+		}
+
+	ss << "Genre: ";
+	ss << strGenre;
+	ss << endl;
+
 }

@@ -13,7 +13,8 @@
 using std::vector;
 
 class InputBehaviour {
-
+public:
+	virtual ~InputBehaviour() {};
 	virtual void getMediaData(vector<void*>&) = 0;
 
 };

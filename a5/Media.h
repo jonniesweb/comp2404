@@ -9,8 +9,10 @@
 #define MEDIA_H_
 
 #include <string>
+#include <iostream>
 
 using std::string;
+using std::ostream;
 
 class Media {
 public:
@@ -18,6 +20,8 @@ public:
 	string& getTitle();
 	int getYear() const;
 	bool operator==(Media&);
+	virtual void print(ostream&) const;
+	friend ostream& operator<<(ostream&, const Media&);
 
 protected:
 	Media(const string& title, const int year);

@@ -35,28 +35,28 @@ Controller::Controller() {
 
 	bool running = true;
 	int menuChoice = -1;
-	int mediaChoice = -1;
-
-	InputBehaviour* mediaBehaviour;
-	MediaFactory* mediaFactory;
-
-	// determine what type of media user wants to manage
-	do {
-		mediaChoice = view.getMediaType();
-	} while (mediaChoice >= 1 && mediaChoice <= 2);
-
-	switch (mediaChoice) {
-		case 1:
-			mediaBehaviour = new MovieInputBehaviour;
-			mediaFactory = new MovieFactory;
-			break;
-		case 2:
-			mediaBehaviour = new BookInputBehaviour;
-			mediaFactory = new BookFactory;
-			break;
-		default:
-			break;
-	}
+//	int mediaChoice = -1;
+//
+//	InputBehaviour* mediaBehaviour;
+//	MediaFactory* mediaFactory;
+//
+//	// determine what type of media user wants to manage
+//	do {
+//		mediaChoice = view.getMediaType();
+//	} while (mediaChoice >= 1 && mediaChoice <= 2);
+//
+//	switch (mediaChoice) {
+//		case 1:
+//			mediaBehaviour = new MovieInputBehaviour;
+//			mediaFactory = new MovieFactory;
+//			break;
+//		case 2:
+//			mediaBehaviour = new BookInputBehaviour;
+//			mediaFactory = new BookFactory;
+//			break;
+//		default:
+//			break;
+//	}
 
 
 	do {
@@ -64,39 +64,39 @@ Controller::Controller() {
 
 		if (menuChoice == 1) { // add media
 
-			List<Media> newMovies;
-			view.getMovies(newMovies);
+			List<Media> newMedia;
+			view.getMedia(newMedia);
 
-			storage.update(DB_ADD, newMovies);
+			storage.update(DB_ADD, newMedia);
 
 		} else if (menuChoice == 2) { // delete media
 
-			List<Media> removedMovies;
-			string movieTitle = view.deleteMovie();
+			List<Media> removedMedia;
+			string mediaTitle = view.deleteMedia();
 
-			List<Media> movieList;
-			storage.retrieve(movieList);
+			List<Media> mediaList;
+			storage.retrieve(mediaList);
 
-			for (int i = 0; i < movieList.getSize(); ++i) {
-				if (movieList.get(i).getTitle().compare(movieTitle) == 0) {
-					removedMovies += movieList.get(i);
+			for (int i = 0; i < mediaList.getSize(); ++i) {
+				if (mediaList.get(i).getTitle().compare(mediaTitle) == 0) {
+					removedMedia += mediaList.get(i);
 				}
 			}
 
-			storage.update(DB_DELETE, removedMovies);
+			storage.update(DB_DELETE, removedMedia);
 
 		} else if (menuChoice == 3) { // list all media
 
-			List<Media> allMovies;
-			storage.retrieve(allMovies);
+			List<Media> allMedia;
+			storage.retrieve(allMedia);
 
-//			view.listMovies(allMovies); XXX: temp
+			view.listMedia(allMedia);
 
 		} else if (menuChoice == 4) { // list all media in reverse
-			List<Media> allMovies;
-			storage.retrieve(allMovies);
+			List<Media> allMedia;
+			storage.retrieve(allMedia);
 
-//			view.listMoviesReverse(allMovies); XXX: temp
+			view.listMediaReverse(allMedia);
 
 		} else if (menuChoice == 0) { // exit
 			running = false;

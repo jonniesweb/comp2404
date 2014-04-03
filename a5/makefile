@@ -1,4 +1,4 @@
-CC = g++
+CC = clang++
 CFLAGS = -Wall -g3 
 
 SRC= \

@@ -14,6 +14,9 @@
 #include "Media.h"
 #include "Movie.h"
 
+class InputBehaviour;
+class MediaFactory;
+
 using std::string;
 
 class View {
@@ -21,12 +24,12 @@ public:
 	View();
 	~View();
 	int getMediaType();
-//	const void listMovies(List<Media>&);
-//	const void listMoviesReverse(List<Media>&);
+	const void listMedia(List<Media>&);
+	const void listMediaReverse(List<Media>&);
 	int getMenuChoice();
 	void displayMessage(const string&);
-	void getMovies(List<Media>&);
-	string deleteMovie();
+	void getMedia(List<Media>&);
+	string deleteMedia();
 	Genre getGenre();
 
 	static string getString();
@@ -37,6 +40,10 @@ private:
 	Movie& getMovie();
 	void displayMenu();
 	string genreToString(Genre);
+
+
+	InputBehaviour* mediaBehaviour;
+	MediaFactory* mediaFactory;
 };
 
 #endif /* VIEW_H_ */

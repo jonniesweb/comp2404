@@ -14,6 +14,8 @@
 using std::vector;
 
 class MediaFactory {
+public:
+	virtual ~MediaFactory() {};
 	virtual void createData(vector<void*>& values, Media** newMedia) = 0;
 };
 
