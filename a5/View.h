@@ -13,9 +13,9 @@
 #include "List.h"
 #include "Media.h"
 #include "Movie.h"
+#include "InputBehaviour.h"
+#include "MediaFactory.h"
 
-class InputBehaviour;
-class MediaFactory;
 
 using std::string;
 
@@ -30,19 +30,14 @@ public:
 	void displayMessage(const string&);
 	void getMedia(List<Media*>&);
 	string deleteMedia();
-	Genre getGenre();
 
 	static string getString();
 	static int getInt();
 
 private:
-
-	Movie& getMovie();
 	void displayMenu();
-	string genreToString(Genre);
 
-
-	InputBehaviour* mediaBehaviour;
+	InputBehaviour* inputBehaviour;
 	MediaFactory* mediaFactory;
 };
 

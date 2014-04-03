@@ -38,11 +38,11 @@ View::View() {
 
 	switch (mediaChoice) {
 	case 1:
-		mediaBehaviour = new MovieInputBehaviour;
+		inputBehaviour = new MovieInputBehaviour;
 		mediaFactory = new MovieFactory;
 		break;
 	case 2:
-		mediaBehaviour = new BookInputBehaviour;
+		inputBehaviour = new BookInputBehaviour;
 		mediaFactory = new BookFactory;
 		break;
 	default:
@@ -51,7 +51,7 @@ View::View() {
 }
 
 View::~View() {
-	delete mediaBehaviour;
+	delete inputBehaviour;
 	delete mediaFactory;
 
 }
@@ -78,50 +78,6 @@ int View::getMenuChoice() {
 	cout << "( 0 )  Exit" << endl;
 
 	return getInt();
-}
-
-/**
- * Display a list of genres and get a chosen genre from the user
- * @return
- */
-Genre View::getGenre() {
-
-	cout << endl;
-	cout << "Please specify a genre:" << endl;
-	cout << "(1) Comedy" << endl;
-	cout << "(2) Drama" << endl;
-	cout << "(3) Action" << endl;
-	cout << "(4) Horror" << endl;
-	cout << "(5) Science-Fiction" << endl;
-	cout << "(6) Adventure" << endl;
-	cout << "(7) Western" << endl;
-
-	int value = getInt();
-	switch (value) {
-	case 1:
-		return COMEDY;
-		break;
-	case 2:
-		return DRAMA;
-		break;
-	case 3:
-		return ACTION;
-		break;
-	case 4:
-		return HORROR;
-		break;
-	case 5:
-		return SF;
-		break;
-	case 6:
-		return ADVENTURE;
-		break;
-	case 7:
-		return WESTERN;
-		break;
-	default:
-		return UNKNOWN;
-	}
 }
 
 /**
@@ -160,7 +116,7 @@ void View::getMedia(List<Media*>& mediaList) {
 	for (int j = 0; j < numItems; ++j) {
 
 		vector<void*> values;
-		mediaBehaviour->getMediaData(values);
+		inputBehaviour->getMediaData(values);
 
 		Media* media;
 		mediaFactory->createData(values, &media);
@@ -201,42 +157,6 @@ const void View::listMediaReverse(List<Media*>& medias) {
 		cout << endl;
 		cout << *media;
 	}
-}
-
-/**
- * Convert a Genre type to a string
- * @param genre
- * @return
- */
-string View::genreToString(Genre genre) {
-	switch (genre) {
-	case COMEDY:
-		return "Comedy";
-
-	case ACTION:
-		return "Action";
-
-	case HORROR:
-		return "Horror";
-
-	case DRAMA:
-		return "Drama";
-
-	case SF:
-		return "Science-Fiction";
-
-	case ADVENTURE:
-		return "Adventure";
-
-	case WESTERN:
-		return "Western";
-
-	case UNKNOWN: // fallthrough
-	default:
-		return "Unknown";
-	}
-
-	return "Unknown";
 }
 
 /**
