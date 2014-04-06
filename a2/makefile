@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -std=c++11 -Wall
+CFLAGS = -Wall
 
 SRC= \
 Controller.cpp \
