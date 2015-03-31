@@ -8,3 +8,6 @@ Each directory contains the assignment outline and my solutions. The course syll
 Remember kids, if it compiles :shipit:. Watch your step, my code has leaks.
 
 Get ready to be an automaton and to love linked lists in this class.
+
+## Spotted in HP 4th floor bathroom
+![GitHub account found in Herzberg 4th floor bathroom](/images/bathroom.jpg)
